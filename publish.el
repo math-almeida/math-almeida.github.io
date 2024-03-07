@@ -10,19 +10,21 @@
 ;; Refer the Makefile for more info.
 
 ;;; Code:
-(require 'package)
-(package-initialize)
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-refresh-contents)
-(package-install 'htmlize)
-(package-install 'org-plus-contrib)
-(package-install 'ox-reveal)
-(package-install 'simple-httpd)
+(package-initialize) ;; Required because we need to load htmlize.
+
+(unless package-archive-contents
+  (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (package-refresh-contents))
+(dolist (pkg '(htmlize rust-mode json-mode))
+  (unless (package-installed-p pkg)
+    (package-install pkg)))
 
 (require 'org)
 (require 'ox-publish)
-(require 'ox-reveal)
+
+(setq-default make-backup-files nil)
 
 ;; setting to nil, avoids "Author: x" at the bottom
 (setq org-export-with-section-numbers nil
@@ -44,15 +46,16 @@
       org-src-fontify-natively t)
 
 
-(defvar me/website-html-head
-  "<link rel='icon' type='image/x-icon' href='/images/favicon.ico'/>
+(defvar website-html-head
+  "<link rel='icon' type='image/png' href='/images/favicon.png'/>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link rel='stylesheet' href='https://code.cdn.mozilla.net/fonts/fira.css'>
+<link rel='preconnect' href='https://fonts.gstatic.com'>
+<link href='https://code.cdn.mozilla.net/fonts/zilla-slab.css' rel='stylesheet'>
 <link rel='stylesheet' href='/css/site.css?v=2' type='text/css'/>
 <link rel='stylesheet' href='/css/custom.css' type='text/css'/>
 <link rel='stylesheet' href='/css/syntax-coloring.css' type='text/css'/>")
 
-(defun me/website-html-preamble (plist)
+(defun website-html-preamble (plist)
   "PLIST: An entry."
   (if (org-export-get-date plist this-date-format)
       (plist-put plist
@@ -63,7 +66,7 @@
   (with-temp-buffer
     (insert-file-contents "../html-templates/preamble.html") (buffer-string)))
 
-(defun me/website-html-postamble (plist)
+(defun website-html-postamble (plist)
   "PLIST."
   (concat (format
            (with-temp-buffer
@@ -76,7 +79,7 @@
   "File types that are published as static files.")
 
 
-(defun me/org-sitemap-format-entry (entry style project)
+(defun org-sitemap-format-entry (entry style project)
   "Format posts with author and published data in the index page.
 
 ENTRY: file-name
@@ -94,13 +97,7 @@ PROJECT: `posts in this case."
         (t entry)))
 
 
-(defun me/org-reveal-publish-to-html (plist filename pub-dir)
-  "Publish an org file to reveal.js HTML Presentation.
-FILENAME is the filename of the Org file to be published.  PLIST
-is the property list for the given project.  PUB-DIR is the
-publishing directory. Returns output file name."
-  (let ((org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/"))
-    (org-publish-org-to 'reveal filename ".html" plist pub-dir)))
+(setq org-publish-timestamp-directory "~/.cache/org-publish/")
 
 (setq org-publish-project-alist
       `(("posts"
@@ -112,17 +109,17 @@ publishing directory. Returns output file name."
          :exclude ,(regexp-opt '("README.org" "draft"))
          :auto-sitemap t
          :sitemap-filename "index.org"
-         :sitemap-title "Blog Index"
-         :sitemap-format-entry me/org-sitemap-format-entry
+         :sitemap-title "Blog index"
+         :sitemap-format-entry org-sitemap-format-entry
          :sitemap-style list
          :sitemap-sort-files anti-chronologically
          :html-link-home "/"
          :html-link-up "/"
          :html-head-include-scripts t
          :html-head-include-default-style nil
-         :html-head ,me/website-html-head
-         :html-preamble me/website-html-preamble
-         :html-postamble me/website-html-postamble)
+         :html-head ,website-html-head
+         :html-preamble website-html-preamble
+         :html-postamble website-html-postamble)
         ("about"
          :base-directory "about"
          :base-extension "org"
@@ -135,9 +132,9 @@ publishing directory. Returns output file name."
          :html-link-up "/"
          :html-head-include-scripts t
          :html-head-include-default-style nil
-         :html-head ,me/website-html-head
-         :html-preamble me/website-html-preamble
-         :html-postamble me/website-html-postamble)
+         :html-head ,website-html-head
+         :html-preamble website-html-preamble
+         :html-postamble website-html-postamble)
         ("css"
          :base-directory "./css"
          :base-extension "css"
@@ -156,20 +153,6 @@ publishing directory. Returns output file name."
          :publishing-directory "./public/assets"
          :publishing-function org-publish-attachment
          :recursive t)
-        ("rss"
-         :base-directory "posts"
-         :base-extension "org"
-         :html-link-home "http://example.com/"
-         :rss-link-home "http://example.com/"
-         :html-link-use-abs-url t
-         :rss-extension "xml"
-         :publishing-directory "./public"
-         :publishing-function (org-rss-publish-to-rss)
-         :section-number nil
-         :exclude ".*"
-         :include ("index.org")
-         :table-of-contents nil)
-        ("all" :components ("posts" "about" "css" "images" "assets" "rss"))))
+        ("all" :components ("posts" "about" "css" "images" "assets"))))
 
-(provide 'publish)
-;;; publish.el ends here
+(org-publish-all t)
