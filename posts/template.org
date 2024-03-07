@@ -8,11 +8,54 @@ can also use ~verbatim~ or =code=. Use +strikethrough+ if
 needed.[fn:org-manual][fn:publish]
 
 **** HTML snippet:
-     #+BEGIN_SRC html
-       <html>
-         <h1></h1>
-       </html>
-     #+END_SRC
+     #+begin_src html
+<!doctype html>
+<html>
+    <head>
+        {% include "head" %}
+    </head>
+    <body>
+        <div>
+        </div>
+            {% include "navbar" %}
+
+            {% block content %}
+            {% endblock content %}
+
+            {% include "scripts" %}
+        </div>
+    </body>
+</html>
+#+end_src
+
+**** Rust snippet
+#+BEGIN_SRC rust
+  #[get("/blog")]
+  fn blog_index() -> Template {
+      let context = get_base_context("/blog");
+      Template::render(get_template("/blog"), context)
+  }
+#+END_SRC
+
+**** Another rust snippet
+
+#+begin_src rust
+  /// SiteContext represents the entire context required to render
+  /// this website. See [get_base_context](crate::context::get_base_context)
+  #[derive(Serialize, Debug)]
+  pub struct SiteContext<'a> {
+      /// base is the static key-value context of the website.
+      /// All of the information in base comes from
+      /// [STATIC_SITE_CONTEXT_KV](crate::context::STATIC_SITE_CONTEXT_KV)
+      pub base: &'static SiteContextKv,
+      /// kv is the dynamic key-value context of the website.
+      pub kv: SiteContextKv,
+      /// blog is all blog related items, see [OrgBlog](crate::context::OrgBlog)
+      pub blog: &'static OrgBlog,
+      /// curr_blog is the current blog article, if applicable.
+      pub curr_blog: Option<&'a OrgModeHtml>,
+  }
+#+end_src
 
 **** Python snippet with line numbers:
      #+BEGIN_SRC python -n

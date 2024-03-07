@@ -1,11 +1,25 @@
+
 body {
-  font-family: 'Fira Sans', Helvetica, sans-serif;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 300;
   line-height: 1.5;
-  font-size: 18px;
-  background: #fff;
-  color: #666;
+  font-size: 20px;
+  background: #222222;
+  color: white;
   margin: 0;
   border-top: 3px solid #1692cc;
+
+  /* Fiz weird numbers in Zilla Slab */
+  font-variant-numeric: lining-nums;
+  -moz-font-feature-settings:"lnum" 1;
+  -moz-font-feature-settings:"lnum=1";
+  -ms-font-feature-settings:"lnum" 1;
+  -o-font-feature-settings:"lnum" 1;
+  -webkit-font-feature-settings:"lnum" 1;
+  font-feature-settings:"lnum" 1;
+}
+b, .subtitle, th {
+  font-weight: 600 !important;
 }
 @media (max-width: 799px) {
   body {
@@ -17,10 +31,10 @@ body h1,
 body h2,
 body h3,
 body h4 {
-  font-weight: normal;
+  font-weight: lighter;
   margin: 0;
   padding: 0;
-  color: #444;
+  color: white;
 }
 body h1 b,
 body h2 b,
@@ -57,7 +71,6 @@ body h2 {
 body h3 {
   font-size: 22px;
   margin-top: 40px;
-  font-weight: bold;
 }
 body p {
   text-align: justify;
@@ -71,7 +84,7 @@ body a:hover {
   text-decoration: underline;
 }
 body pre {
-  background: white;
+  background: #222222;
 }
 body pre.src {
   overflow-y: auto !important;
@@ -122,7 +135,7 @@ body .tag span {
 }
 body .pubdate {
   color: #aaa;
-  font-size: 14px;
+  font-size: 18px;
   margin-bottom: 20px;
   margin-top: -16px;
   text-align: right;
@@ -156,7 +169,7 @@ body #content {
   margin-top: 10px;
 }
 body #postamble {
-  font-size: 0.8em;
+  font-size: 0.9em;
   line-height: 1.8em;
   margin-top: 50px;
   text-align: center;
@@ -165,7 +178,7 @@ body #postamble {
   border-top: 1px solid #e2e2e2;
 }
 body #postamble a {
-  color: #e9a390;
+  /* color: #e9a390; */
 }
 @media (min-width: 800px) {
   body #preamble {
@@ -181,7 +194,6 @@ body .intro {
 }
 body .intro h1 {
   font-size: 42px;
-  font-weight: bold;
   line-height: 1em;
   margin: .3em;
   padding: 0;
@@ -199,8 +211,8 @@ body .nav {
   text-align: center;
   margin-top: 30px;
   border-bottom: 1px solid #e2e2e2;
-  font-size: 12px;
-  text-transform: uppercase;
+  font-size: 20px;
+  /* text-transform: uppercase; */
 }
 body .nav ul {
   list-style: none;
@@ -213,9 +225,9 @@ body .nav ul li {
 }
 body .nav ul li a {
   display: inline-block;
-  padding-right: 6px;
+  /* padding-right: 6px; */
   border-radius: 0;
-  font-weight: normal;
+  font-weight: lighter;
   color: #6a6a6a;
 }
 body #disqus_thread {

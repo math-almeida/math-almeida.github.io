@@ -23,8 +23,6 @@
 #postamble p, #preamble p { font-size: 90%; margin: .2em; }
 p.verse { margin-left: 3%; }
 pre {
-  border: 1px solid #ccc;
-  box-shadow: 3px 3px 3px #eee;
   padding: 8pt;
   font-family: monospace;
   overflow: auto;
@@ -38,24 +36,24 @@ pre.src {
 pre.src:before {
   display: none;
   position: absolute;
-  background-color: white;
-  top: -10px;
+  color: #ccc;
+  top: -5px;
   right: 10px;
   padding: 3px;
-  border: 1px solid black;
 }
 pre.src:hover:before { display: inline;}
 /* Languages per Org manual */
 pre.src-asymptote:before { content: 'Asymptote'; }
 pre.src-awk:before { content: 'Awk'; }
 pre.src-C:before { content: 'C'; }
-/* pre.src-C++ doesn't work in CSS */
+pre.src-C\+\+:before { content: 'C++'; }
 pre.src-clojure:before { content: 'Clojure'; }
 pre.src-css:before { content: 'CSS'; }
 pre.src-D:before { content: 'D'; }
 pre.src-ditaa:before { content: 'ditaa'; }
 pre.src-dot:before { content: 'Graphviz'; }
 pre.src-calc:before { content: 'Emacs Calc'; }
+pre.src-elisp:before { content: 'Emacs Lisp'; }
 pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
 pre.src-fortran:before { content: 'Fortran'; }
 pre.src-gnuplot:before { content: 'gnuplot'; }
@@ -162,7 +160,7 @@ dt { font-weight: bold; }
 #org-div-home-and-up
  { text-align: right; font-size: 70%; white-space: nowrap; }
 textarea { overflow-x: auto; }
-.linenr { font-size: smaller }
+.linenr { font-size: smaller; color: #222222; }
 .code-highlighted { background-color: #ffff00; }
 .org-info-js_info-navigation { border-style: none; }
 #org-info-js_console-label
@@ -179,7 +177,7 @@ textarea { overflow-x: auto; }
 .org-bold { /* bold */ font-weight: bold; }
 .org-bold-italic { /* bold-italic */ font-weight: bold; font-style: italic; }
 .org-buffer-menu-buffer { /* buffer-menu-buffer */ font-weight: bold; }
-.org-builtin { /* font-lock-builtin-face */ color: #7a378b; }
+.org-builtin { /* font-lock-builtin-face */ color: #ebd50a; }
 .org-button { /* button */ text-decoration: underline; }
 .org-calendar-today { /* calendar-today */ text-decoration: underline; }
 .org-change-log-acknowledgement { /* change-log-acknowledgement */ color: #b22222; }
@@ -192,8 +190,8 @@ textarea { overflow-x: auto; }
 .org-change-log-name { /* change-log-name */ color: #008b8b; }
 .org-comint-highlight-input { /* comint-highlight-input */ font-weight: bold; }
 .org-comint-highlight-prompt { /* comint-highlight-prompt */ color: #00008b; }
-.org-comment { /* font-lock-comment-face */ color: #b22222; }
-.org-comment-delimiter { /* font-lock-comment-delimiter-face */ color: #b22222; }
+.org-comment { /* font-lock-comment-face */ color: #999988; font-style: italic; }
+.org-comment-delimiter { /* font-lock-comment-delimiter-face */ color: #999988; font-style: italic; }
 .org-completions-annotations { /* completions-annotations */ font-style: italic; }
 .org-completions-common-part { /* completions-common-part */ color: #000000; background-color: #ffffff; }
 .org-completions-first-difference { /* completions-first-difference */ font-weight: bold; }
@@ -222,7 +220,7 @@ textarea { overflow-x: auto; }
 .org-flyspell-duplicate { /* flyspell-duplicate */ color: #cdad00; font-weight: bold; text-decoration: underline; }
 .org-flyspell-incorrect { /* flyspell-incorrect */ color: #ff4500; font-weight: bold; text-decoration: underline; }
 .org-fringe { /* fringe */ background-color: #f2f2f2; }
-.org-function-name { /* font-lock-function-name-face */ color: #0000ff; }
+.org-function-name { /* font-lock-function-name-face */ color: #6eeef8; }
 .org-header-line { /* header-line */ color: #333333; background-color: #e5e5e5; }
 .org-help-argument-name { /* help-argument-name */ font-style: italic; }
 .org-highlight { /* highlight */ background-color: #b4eeb4; }
@@ -230,7 +228,7 @@ textarea { overflow-x: auto; }
 .org-isearch { /* isearch */ color: #b0e2ff; background-color: #cd00cd; }
 .org-isearch-fail { /* isearch-fail */ background-color: #ffc1c1; }
 .org-italic { /* italic */ font-style: italic; }
-.org-keyword { /* font-lock-keyword-face */ color: #a020f0; }
+.org-keyword { /* font-lock-keyword-face */ color: #f8cf62; }
 .org-lazy-highlight { /* lazy-highlight */ background-color: #afeeee; }
 .org-link { /* link */ color: #0000ff; text-decoration: underline; }
 .org-link-visited { /* link-visited */ color: #8b008b; text-decoration: underline; }
@@ -298,7 +296,7 @@ textarea { overflow-x: auto; }
 .org-outline-6 { /* outline-6 */ color: #008b8b; }
 .org-outline-7 { /* outline-7 */ color: #7a378b; }
 .org-outline-8 { /* outline-8 */ color: #8b2252; }
-.org-preprocessor { /* font-lock-preprocessor-face */ color: #7a378b; }
+.org-preprocessor { /* font-lock-preprocessor-face */ color: #ebd50a; }
 .org-query-replace { /* query-replace */ color: #b0e2ff; background-color: #cd00cd; }
 .org-regexp-grouping-backslash { /* font-lock-regexp-grouping-backslash */ font-weight: bold; }
 .org-regexp-grouping-construct { /* font-lock-regexp-grouping-construct */ font-weight: bold; }
@@ -307,13 +305,13 @@ textarea { overflow-x: auto; }
 .org-shadow { /* shadow */ color: #7f7f7f; }
 .org-show-paren-match { /* show-paren-match */ background-color: #40e0d0; }
 .org-show-paren-mismatch { /* show-paren-mismatch */ color: #ffffff; background-color: #a020f0; }
-.org-string { /* font-lock-string-face */ color: #8b2252; }
+.org-string { /* font-lock-string-face */ color: #81c25f; font-weight: bold; }
 .org-tool-bar { /* tool-bar */ color: #000000; background-color: #bfbfbf; }
 .org-tooltip { /* tooltip */ color: #000000; background-color: #ffffe0; }
 .org-trailing-whitespace { /* trailing-whitespace */ background-color: #ff0000; }
 .org-type { /* font-lock-type-face */ color: #228b22; }
 .org-underline { /* underline */ text-decoration: underline; }
-.org-variable-name { /* font-lock-variable-name-face */ color: #a0522d; }
+.org-variable-name { /* font-lock-variable-name-face */ color: #1c2028; }
 .org-warning { /* font-lock-warning-face */ color: #ff0000; font-weight: bold; }
 .org-widget-button { /* widget-button */ font-weight: bold; }
 .org-widget-button-pressed { /* widget-button-pressed */ color: #ff0000; }
@@ -321,3 +319,6 @@ textarea { overflow-x: auto; }
 .org-widget-field { /* widget-field */ background-color: #d9d9d9; }
 .org-widget-inactive { /* widget-inactive */ color: #7f7f7f; }
 .org-widget-single-line-field { /* widget-single-line-field */ background-color: #d9d9d9; }
+.org-nxml-element-local-name { /* font-lock-keyword-face */ color: #223fae; }
+.org-nxml-tag-delimiter { /* font-lock-keyword-face */ color: #223fae; }
+.org-nxml-tag-slash { /* font-lock-keyword-face */ color: #223fae; }
