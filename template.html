@@ -72,21 +72,73 @@ can also use <code>verbatim</code> or <code>code</code>. Use <del>strikethrough<
 needed.<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup><sup>, </sup><sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
 </p>
 
-<section id="outline-container-orgc1a9dc1" class="outline-2">
-<h2 id="orgc1a9dc1">HTML snippet:</h2>
-<div class="outline-text-2" id="text-orgc1a9dc1">
+<section id="outline-container-org982c7ae" class="outline-2">
+<h2 id="org982c7ae">HTML snippet:</h2>
+<div class="outline-text-2" id="text-org982c7ae">
 <div class="org-src-container">
-<pre class="src src-html">&lt;<span class="org-function-name">html</span>&gt;
-  &lt;<span class="org-function-name">h1</span>&gt;&lt;/<span class="org-function-name">h1</span>&gt;
+<pre class="src src-html">&lt;<span class="org-keyword">!doctype</span> html&gt;
+&lt;<span class="org-function-name">html</span>&gt;
+    &lt;<span class="org-function-name">head</span>&gt;
+        {% include "head" %}
+    &lt;/<span class="org-function-name">head</span>&gt;
+    &lt;<span class="org-function-name">body</span>&gt;
+        &lt;<span class="org-function-name">div</span>&gt;
+        &lt;/<span class="org-function-name">div</span>&gt;
+            {% include "navbar" %}
+
+            {% block content %}
+            {% endblock content %}
+
+            {% include "scripts" %}
+        &lt;/<span class="org-function-name">div</span>&gt;
+    &lt;/<span class="org-function-name">body</span>&gt;
 &lt;/<span class="org-function-name">html</span>&gt;
 </pre>
 </div>
 </div>
 </section>
 
-<section id="outline-container-org1108a86" class="outline-2">
-<h2 id="org1108a86">Python snippet with line numbers:</h2>
-<div class="outline-text-2" id="text-org1108a86">
+<section id="outline-container-org4fe8e12" class="outline-2">
+<h2 id="org4fe8e12">Rust snippet</h2>
+<div class="outline-text-2" id="text-org4fe8e12">
+<div class="org-src-container">
+<pre class="src src-rust"><span class="org-preprocessor">#[get(</span><span class="org-string">"/blog"</span><span class="org-preprocessor">)]</span>
+<span class="org-keyword">fn</span> <span class="org-function-name">blog_index</span>() -&gt; <span class="org-type">Template</span> {
+    <span class="org-keyword">let</span> <span class="org-variable-name">context</span> = get_base_context(<span class="org-string">"/blog"</span>);
+    <span class="org-type">Template</span>::render(get_template(<span class="org-string">"/blog"</span>), context)
+}
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orge692506" class="outline-2">
+<h2 id="orge692506">Another rust snippet</h2>
+<div class="outline-text-2" id="text-orge692506">
+<div class="org-src-container">
+<pre class="src src-rust"><span class="org-doc">/// SiteContext represents the entire context required to render</span>
+<span class="org-doc">/// this website. See [get_base_context](crate::context::get_base_context)</span>
+<span class="org-preprocessor">#[derive(Serialize, Debug)]</span>
+<span class="org-keyword">pub</span> <span class="org-keyword">struct</span> <span class="org-type">SiteContext</span>&lt;'<span class="org-variable-name">a</span>&gt; {
+    <span class="org-doc">/// base is the static key-value context of the website.</span>
+    <span class="org-doc">/// All of the information in base comes from</span>
+    <span class="org-doc">/// [STATIC_SITE_CONTEXT_KV](crate::context::STATIC_SITE_CONTEXT_KV)</span>
+    <span class="org-keyword">pub</span> <span class="org-variable-name">base</span>: <span class="org-rust-ampersand">&amp;</span>'<span class="org-keyword">static</span> <span class="org-type">SiteContextKv</span>,
+    <span class="org-doc">/// kv is the dynamic key-value context of the website.</span>
+    <span class="org-keyword">pub</span> <span class="org-variable-name">kv</span>: <span class="org-type">SiteContextKv</span>,
+    <span class="org-doc">/// blog is all blog related items, see [OrgBlog](crate::context::OrgBlog)</span>
+    <span class="org-keyword">pub</span> <span class="org-variable-name">blog</span>: <span class="org-rust-ampersand">&amp;</span>'<span class="org-keyword">static</span> <span class="org-type">OrgBlog</span>,
+    <span class="org-doc">/// curr_blog is the current blog article, if applicable.</span>
+    <span class="org-keyword">pub</span> <span class="org-variable-name">curr_blog</span>: <span class="org-type">Option</span>&lt;<span class="org-rust-ampersand">&amp;</span>'<span class="org-variable-name">a</span> <span class="org-type">OrgModeHtml</span>&gt;,
+}
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-org2b42a40" class="outline-2">
+<h2 id="org2b42a40">Python snippet with line numbers:</h2>
+<div class="outline-text-2" id="text-org2b42a40">
 <div class="org-src-container">
 <pre class="src src-python"><span class="linenr"> 1: </span><span class="org-keyword">from</span> contextlib <span class="org-keyword">import</span> contextmanager
 <span class="linenr"> 2: </span>
@@ -103,9 +155,9 @@ needed.<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup><sup>, </sup><
 </div>
 </section>
 
-<section id="outline-container-org9668a78" class="outline-2">
-<h2 id="org9668a78">Emacs Lisp snippet</h2>
-<div class="outline-text-2" id="text-org9668a78">
+<section id="outline-container-org2198144" class="outline-2">
+<h2 id="org2198144">Emacs Lisp snippet</h2>
+<div class="outline-text-2" id="text-org2198144">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(message <span class="org-string">"foo-bar"</span>)
 </pre>
@@ -113,23 +165,23 @@ needed.<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup><sup>, </sup><
 </div>
 </section>
 
-<section id="outline-container-orgdb50825" class="outline-2">
-<h2 id="orgdb50825">Github Gist:</h2>
-<div class="outline-text-2" id="text-orgdb50825">
+<section id="outline-container-org6128429" class="outline-2">
+<h2 id="org6128429">Github Gist:</h2>
+<div class="outline-text-2" id="text-org6128429">
 <script src="https://gist.github.com/psachin/97708deb39aa60484c95a9df6f535ba6.js"></script>
 </div>
 </section>
 
-<section id="outline-container-org8308599" class="outline-2">
-<h2 id="org8308599">Gitlab Snippet</h2>
-<div class="outline-text-2" id="text-org8308599">
+<section id="outline-container-org9da456a" class="outline-2">
+<h2 id="org9da456a">Gitlab Snippet</h2>
+<div class="outline-text-2" id="text-org9da456a">
 <script src="https://gitlab.com/snippets/1790218.js"></script>
 </div>
 </section>
 
-<section id="outline-container-orgf28e7fc" class="outline-2">
-<h2 id="orgf28e7fc">Below is the content of <code>.gitlab-ci.yml</code>:</h2>
-<div class="outline-text-2" id="text-orgf28e7fc">
+<section id="outline-container-org70f9ec4" class="outline-2">
+<h2 id="org70f9ec4">Below is the content of <code>.gitlab-ci.yml</code>:</h2>
+<div class="outline-text-2" id="text-org70f9ec4">
 <div class="org-src-container">
 <pre class="src src-conf">image: iquiw/alpine-emacs
 
@@ -154,64 +206,64 @@ test:
 </div>
 </section>
 
-<section id="outline-container-org84cdf0b" class="outline-2">
-<h2 id="org84cdf0b">Center aligned image with no border:</h2>
-<div class="outline-text-2" id="text-org84cdf0b">
+<section id="outline-container-org59c2a4d" class="outline-2">
+<h2 id="org59c2a4d">Center aligned image with no border:</h2>
+<div class="outline-text-2" id="text-org59c2a4d">
 
-<div id="org71f42ca" class="figure">
+<div id="orga0b1793" class="figure">
 <p><img src="../images/posts/template/Spring19-fan-of-fsf.png" alt="Spring19-fan-of-fsf.png" class="center no-border" />
 </p>
 </div>
 </div>
 </section>
 
-<section id="outline-container-org5bf1619" class="outline-2">
-<h2 id="org5bf1619">Image with Black border:</h2>
-<div class="outline-text-2" id="text-org5bf1619">
+<section id="outline-container-org3940439" class="outline-2">
+<h2 id="org3940439">Image with Black border:</h2>
+<div class="outline-text-2" id="text-org3940439">
 
-<div id="org9aa1955" class="figure">
+<div id="org3f09e02" class="figure">
 <p><img src="../images/posts/template/Spring19-fan-of-fsf.png" alt="Spring19-fan-of-fsf.png" class="black-border" />
 </p>
 </div>
 </div>
 </section>
-<section id="outline-container-orgf45327f" class="outline-2">
-<h2 id="orgf45327f">Image with spaced border:</h2>
-<div class="outline-text-2" id="text-orgf45327f">
+<section id="outline-container-org0248a1f" class="outline-2">
+<h2 id="org0248a1f">Image with spaced border:</h2>
+<div class="outline-text-2" id="text-org0248a1f">
 
-<div id="org7c8bc06" class="figure">
+<div id="org44e90ff" class="figure">
 <p><img src="../images/posts/template/Spring19-fan-of-fsf.png" alt="Spring19-fan-of-fsf.png" class="spaced-border" />
 </p>
 </div>
 </div>
 </section>
-<section id="outline-container-org477909f" class="outline-2">
-<h2 id="org477909f">Image with rounded corners:</h2>
-<div class="outline-text-2" id="text-org477909f">
+<section id="outline-container-org20c78de" class="outline-2">
+<h2 id="org20c78de">Image with rounded corners:</h2>
+<div class="outline-text-2" id="text-org20c78de">
 
-<div id="org08d0217" class="figure">
+<div id="orge3bac48" class="figure">
 <p><img src="../images/posts/template/Spring19-fan-of-fsf.png" alt="Spring19-fan-of-fsf.png" class="rounded-border" />
 </p>
 </div>
 </div>
 </section>
 
-<section id="outline-container-org5b829e4" class="outline-2">
-<h2 id="org5b829e4">Image with rounded corners and border:</h2>
-<div class="outline-text-2" id="text-org5b829e4">
+<section id="outline-container-org0c0d143" class="outline-2">
+<h2 id="org0c0d143">Image with rounded corners and border:</h2>
+<div class="outline-text-2" id="text-org0c0d143">
 
-<div id="orgeb40910" class="figure">
+<div id="org61d6e7c" class="figure">
 <p><img src="../images/posts/template/Spring19-fan-of-fsf.png" alt="Spring19-fan-of-fsf.png" class="rounded-border black-border" />
 </p>
 </div>
 </div>
 </section>
 
-<section id="outline-container-org88d3ff2" class="outline-2">
-<h2 id="org88d3ff2">Image with Caption:</h2>
-<div class="outline-text-2" id="text-org88d3ff2">
+<section id="outline-container-orgd713c87" class="outline-2">
+<h2 id="orgd713c87">Image with Caption:</h2>
+<div class="outline-text-2" id="text-orgd713c87">
 
-<div id="org7bec93d" class="figure">
+<div id="orgd4dc46b" class="figure">
 <p><img src="../images/posts/template/Spring19-fan-of-fsf.png" alt="Spring19-fan-of-fsf.png" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Fan of FSF</p>
@@ -219,20 +271,20 @@ test:
 </div>
 </section>
 
-<section id="outline-container-org227054a" class="outline-2">
-<h2 id="org227054a">Image with 40% width:</h2>
-<div class="outline-text-2" id="text-org227054a">
+<section id="outline-container-orgeb5ac88" class="outline-2">
+<h2 id="orgeb5ac88">Image with 40% width:</h2>
+<div class="outline-text-2" id="text-orgeb5ac88">
 
-<div id="orgbfce11c" class="figure">
+<div id="org10e83ef" class="figure">
 <p><img src="../images/posts/template/Spring19-fan-of-fsf.png" alt="Spring19-fan-of-fsf.png" width="40%" />
 </p>
 </div>
 </div>
 </section>
 
-<section id="outline-container-org36a4a37" class="outline-2">
-<h2 id="org36a4a37">Table:</h2>
-<div class="outline-text-2" id="text-org36a4a37">
+<section id="outline-container-org3263535" class="outline-2">
+<h2 id="org3263535">Table:</h2>
+<div class="outline-text-2" id="text-org3263535">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
