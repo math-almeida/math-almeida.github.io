@@ -109,7 +109,7 @@ PROJECT: `posts in this case."
          :exclude ,(regexp-opt '("README.org" "draft"))
          :auto-sitemap t
          :sitemap-filename "index.org"
-         :sitemap-title "Blog index"
+         :sitemap-title "Torresmo"
          :sitemap-format-entry org-sitemap-format-entry
          :sitemap-style list
          :sitemap-sort-files anti-chronologically
