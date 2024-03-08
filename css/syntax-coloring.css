@@ -214,7 +214,7 @@ textarea { overflow-x: auto; }
 .org-dired-perm-write { /* dired-perm-write */ color: #b22222; }
 .org-dired-symlink { /* dired-symlink */ color: #a020f0; }
 .org-dired-warning { /* dired-warning */ color: #ff0000; font-weight: bold; }
-.org-doc { /* font-lock-doc-face */ color: #8b2252; }
+.org-doc { /* font-lock-doc-face */ color: #a020f0; }
 .org-escape-glyph { /* escape-glyph */ color: #a52a2a; }
 .org-file-name-shadow { /* file-name-shadow */ color: #7f7f7f; }
 .org-flyspell-duplicate { /* flyspell-duplicate */ color: #cdad00; font-weight: bold; text-decoration: underline; }
@@ -311,7 +311,7 @@ textarea { overflow-x: auto; }
 .org-trailing-whitespace { /* trailing-whitespace */ background-color: #ff0000; }
 .org-type { /* font-lock-type-face */ color: #228b22; }
 .org-underline { /* underline */ text-decoration: underline; }
-.org-variable-name { /* font-lock-variable-name-face */ color: #1c2028; }
+.org-variable-name { /* font-lock-variable-name-face */ color: #ffcc80; }
 .org-warning { /* font-lock-warning-face */ color: #ff0000; font-weight: bold; }
 .org-widget-button { /* widget-button */ font-weight: bold; }
 .org-widget-button-pressed { /* widget-button-pressed */ color: #ff0000; }
