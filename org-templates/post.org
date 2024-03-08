@@ -1,3 +1,3 @@
-#+AUTHOR: John Doe
-#+OPTIONS: toc:nil
-#+HTML_DOCTYPE: xhtml-strict
+#+author: math-almeida
+#+options: toc:nil
+#+html_doctype: xhtml-strict
