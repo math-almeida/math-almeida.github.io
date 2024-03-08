@@ -156,3 +156,10 @@ PROJECT: `posts in this case."
         ("all" :components ("posts" "about" "css" "images" "assets"))))
 
 (org-publish-all t)
+
+;; CNAME config
+;; This file must be manually copied since org-mode has no way of publishing this file
+(let ((source-file "config/CNAME")
+      (destination-file "public/CNAME"))
+  (when (file-exists-p source-file)
+    (copy-file source-file destination-file t)))
