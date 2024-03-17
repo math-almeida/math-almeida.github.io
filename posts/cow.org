@@ -1,0 +1,34 @@
+#+title: Escaping character with serde deserialization
+#+date: <2024-03-17 Sat>
+#+filetags: rust cow str bug
+#+setupfile: ../org-templates/post.org
+
+Supose you have a struct with the following data model:
+
+#+begin_src rust
+  #[derive(Debug, serde::Deserialize)]
+  struct Form<'a> {
+      password: &'a str,
+  }
+#+end_src
+
+If you input a value using this model with an escape character this error will happend:
+
+#+begin_src rust
+  Err(Error("invalid type: string \"123\\\"456\", expected a borrowed string", line: 1, column: 24))
+#+end_src
+
+Why this happend? If we think in the impl we come to the following question: /How is serde supposed to do zero-copy deserialization. which is implied by =&str=, with an escape character?/ 
+
+You can change this reference to =Cow=[fn:cow] wich means =clone-on-write= who can enclose and provide immutable access to borrowed data. 
+
+#+begin_src rust
+  #[derive(Debug, serde::Deserialize)]
+  struct Form<'a> {
+      password: std::borrow::Cow<'a, str>,
+  }
+#+end_src
+
+[[https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=08d39dd2a072cd14200455bcbae26e9c][Here]] is a playground that demonstrate the issue.
+
+[fn:cow] [[https://doc.rust-lang.org/std/borrow/enum.Cow.html][Cow]] documentation.
