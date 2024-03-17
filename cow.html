@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- Mar 17, 2024 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Escaping character with serde deserialization</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="math-almeida" />
+<link rel='icon' type='image/png' href='/images/favicon.png'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='preconnect' href='https://fonts.gstatic.com'>
+<link href='https://code.cdn.mozilla.net/fonts/zilla-slab.css' rel='stylesheet'>
+<link rel='stylesheet' href='/css/site.css?v=2' type='text/css'/>
+<link rel='stylesheet' href='/css/custom.css' type='text/css'/>
+<link rel='stylesheet' href='/css/syntax-coloring.css' type='text/css'/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="/"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><header id="top" class="status">
+<div class='intro'>
+  <img src='/images/about/profile.png' alt='Torresmo' class='no-border'/>
+  <h1>
+    <span class="gray">Torresmo</span>
+  </h1>
+</div>
+
+<div class='nav'>
+<ul>
+<li><a href='/'>Home</a>.</li>
+<li><a href='https://github.com/math-almeida'>GitHub</a>.</li>
+<li><a href='/about/'>About</a></li>
+</ul>
+</div>
+</header>
+<main id="content">
+<h1 class="title">Escaping character with serde deserialization
+<br />
+<span class="subtitle">Published on Mar 17, 2024 by math-almeida.</span>
+</h1>
+<p>
+Supose you have a struct with the following data model:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rust"><span class="org-preprocessor">#[derive(Debug, serde::Deserialize)]</span>
+<span class="org-keyword">struct</span> <span class="org-type">Form</span>&lt;'<span class="org-variable-name">a</span>&gt; {
+    <span class="org-variable-name">password</span>: <span class="org-rust-ampersand">&amp;</span>'<span class="org-variable-name">a</span> <span class="org-type">str</span>,
+}
+</pre>
+</div>
+
+<p>
+If you input a value using this model with an escape character this error will happend:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rust"><span class="org-type">Err</span>(<span class="org-type">Error</span>(<span class="org-string">"invalid type: string \"123\\\"456\", expected a borrowed string"</span>, <span class="org-variable-name">line</span>: 1, <span class="org-variable-name">column</span>: 24))
+</pre>
+</div>
+
+<p>
+Why this happend? If we think in the impl we come to the following question: <i>How is serde supposed to do zero-copy deserialization. which is implied by <code>&amp;str</code>, with an escape character?</i> 
+</p>
+
+<p>
+You can change this reference to <code>Cow</code><sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> wich means <code>clone-on-write</code> who can enclose and provide immutable access to borrowed data. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rust"><span class="org-preprocessor">#[derive(Debug, serde::Deserialize)]</span>
+<span class="org-keyword">struct</span> <span class="org-type">Form</span>&lt;'<span class="org-variable-name">a</span>&gt; {
+    <span class="org-variable-name">password</span>: <span class="org-constant">std</span>::<span class="org-constant">borrow</span>::<span class="org-type">Cow</span>&lt;'<span class="org-variable-name">a</span>, <span class="org-type">str</span>&gt;,
+}
+</pre>
+</div>
+
+<p>
+<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=08d39dd2a072cd14200455bcbae26e9c">Here</a> is a playground that demonstrate the issue.
+</p>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://doc.rust-lang.org/std/borrow/enum.Cow.html">Cow</a> documentation.
+</p></div></div>
+
+
+</div>
+</div></main>
+<footer id="postamble" class="status">
+<div class='footer'>
+  Copyright © 2024 <a href='mailto:matheusalmeida025@gmail.com'>Matheus Almeida.</a><br>
+  Template by <a href='https://gitlab.com/psachin/psachin.gitlab.io/'>Sachin Patil</a> <br>
+  Last updated on Mar 17, 2024. Generated using <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4).
+</div>
+</footer>
+</body>
+</html>
