@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- Jun 07, 2024 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Improve observability in rust repositories</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="math-almeida" />
+<link rel='icon' type='image/png' href='/images/favicon.png'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='preconnect' href='https://fonts.gstatic.com'>
+<link href='https://code.cdn.mozilla.net/fonts/zilla-slab.css' rel='stylesheet'>
+<link rel='stylesheet' href='/css/site.css?v=2' type='text/css'/>
+<link rel='stylesheet' href='/css/custom.css' type='text/css'/>
+<link rel='stylesheet' href='/css/syntax-coloring.css' type='text/css'/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="/"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><header id="top" class="status">
+<div class='intro'>
+  <img src='/images/about/profile.png' alt='Torresmo' class='no-border'/>
+  <h1>
+    <span class="gray">Torresmo</span>
+  </h1>
+</div>
+
+<div class='nav'>
+<ul>
+<li><a href='/'>Home</a>.</li>
+<li><a href='https://github.com/math-almeida'>GitHub</a>.</li>
+<li><a href='/about/'>About</a></li>
+</ul>
+</div>
+</header>
+<main id="content">
+<h1 class="title">Improve observability in rust repositories
+<br />
+<span class="subtitle">Published on Jun 07, 2024 by math-almeida.</span>
+</h1>
+
+<section id="outline-container-org8a9000a" class="outline-2">
+<h2 id="org8a9000a">Overview</h2>
+<div class="outline-text-2" id="text-org8a9000a">
+<p>
+In complex systems, such as distributed software and cloud infrastructures, understanding how the system is behaving can be a challenge.
+Observability allows us to understand a system from the outside, allowing us to ask questions about that system without knowing its inner workings.
+Furthermore, it allows us to easily solve and deal with new problems (ie. “unknown unknowns”) and helps us answer the question: “Why is this happening?”
+A lack of observability means there are certain states or behaviors that cannot be discerned or predicted just by looking at its outputs.
+</p>
+</div>
+</section>
+
+<section id="outline-container-orgf3479a0" class="outline-2">
+<h2 id="orgf3479a0">Why it&rsquo;s important?</h2>
+<div class="outline-text-2" id="text-orgf3479a0">
+<p>
+Even though the benefits of having Observability are apparent, many organizations do not prioritize its implementation.
+The issue lies in outdated assumptions about how systems function. Your application is no longer a single entity residing within your control but a vast, ever-changing ecosystem of services, often dependent on elements you don&rsquo;t own. Failures are always present at all stages of the project and it is impossible to predict all possible failures that may occur.
+</p>
+</div>
+</section>
+
+<section id="outline-container-orga76eeb9" class="outline-2">
+<h2 id="orga76eeb9">The pillars</h2>
+<div class="outline-text-2" id="text-orga76eeb9">
+<p>
+Observability is based on three fundamental elements: logs, metrics and tracing, known as the three pillars of Observability.
+</p>
+</div>
+
+<div id="outline-container-org9c0e8c7" class="outline-3">
+<h3 id="org9c0e8c7">Logs</h3>
+<div class="outline-text-3" id="text-org9c0e8c7">
+<p>
+Logs are records of events that occur within a system. They provide details about activities, errors, exceptions, and other information relevant to the functioning of the system.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfd860a8" class="outline-3">
+<h3 id="orgfd860a8">Tracing</h3>
+<div class="outline-text-3" id="text-orgfd860a8">
+<p>
+Tracing involves tracking individual requests as they move through the entire system. This allows you to understand the path a request follows, including all interactions between the different components of the system.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2fa2c11" class="outline-3">
+<h3 id="org2fa2c11">Metrics</h3>
+<div class="outline-text-3" id="text-org2fa2c11">
+<p>
+Metrics are quantitative measurements that provide information about the performance and behavior of a system over a given period of time. They can include information such as CPU usage, API response time, number of requests per second, among others.
+</p>
+</div>
+</div>
+</section>
+
+<section id="outline-container-org19cf5ec" class="outline-2">
+<h2 id="org19cf5ec">Core concepts</h2>
+<div class="outline-text-2" id="text-org19cf5ec">
+</div>
+<div id="outline-container-orgf199f13" class="outline-3">
+<h3 id="orgf199f13">Structured Log</h3>
+<div class="outline-text-3" id="text-orgf199f13">
+<p>
+It consists of recording important events in systems in an organized and consistent way. These records follow a standardized format, facilitating analysis and extracting insights into system behavior.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org86c3afb" class="outline-3">
+<h3 id="org86c3afb">Log centralization</h3>
+<div class="outline-text-3" id="text-org86c3afb">
+<p>
+It involves sending logs from all system components to a centralized location where they can be efficiently stored, searched, and analyzed.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc09c05e" class="outline-3">
+<h3 id="orgc09c05e">Distributed Tracing</h3>
+<div class="outline-text-3" id="text-orgc09c05e">
+<p>
+It involves instrumenting system-wide requests to track their path as they traverse various components. This is typically done by generating unique tracking IDs that are propagated throughout the request flow.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3c94b06" class="outline-3">
+<h3 id="org3c94b06">Metrics Collection</h3>
+<div class="outline-text-3" id="text-org3c94b06">
+<p>
+It consists of regularly collecting performance metrics, such as CPU usage, memory usage, request response time, among others. These metrics are generally collected at regular intervals and stored for later analysis.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org42173c5" class="outline-3">
+<h3 id="org42173c5">Alerts and Corrective Actions</h3>
+<div class="outline-text-3" id="text-org42173c5">
+<p>
+It consists of configuring alerts based on specific metrics or events that indicate problems or anomalies in the system. When an alert is triggered, corrective actions can be automatically taken to mitigate the issue.
+</p>
+</div>
+</div>
+</section>
+
+<section id="outline-container-org9d7e8b0" class="outline-2">
+<h2 id="org9d7e8b0">Observability in Rust</h2>
+<div class="outline-text-2" id="text-org9d7e8b0">
+<p>
+One amazing crate who provides APIs necessary for instrumenting libraries and applications to emit trace data is <a href="https://docs.rs/tracing/latest/tracing/">tracing</a>.
+Developed by the Tokio team, it&rsquo;s fully built up from the ground for async which is perfect for web applications with Rust logs.
+It uses the concept of &ldquo;spans&rdquo; which are used to record the flow of execution through a program.
+</p>
+
+<p>
+You can use <code>tracing</code> to <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>:
+</p>
+<ul class="org-ul">
+<li>Emit distributed traces to an <a href="https://docs.rs/tracing-opentelemetry/latest/tracing_opentelemetry/">Open Telemetry</a> collector.</li>
+<li>Debug your application with <a href="https://docs.rs/console-subscriber/latest/console_subscriber/">Tokio Console</a>.</li>
+<li>Log to <a href="https://docs.rs/tracing-subscriber/latest/tracing_subscriber/fmt/index.html">stdout</a>, <a href="https://docs.rs/tracing-appender/latest/tracing_appender/">log file</a> or <a href="https://docs.rs/tracing-journald/latest/tracing_journald/">journalId</a>.</li>
+<li><a href="https://docs.rs/tracing-timing/latest/tracing_timing/">profile</a> where your application is spending time.</li>
+</ul>
+</div>
+</section>
+
+<section id="outline-container-org08ae704" class="outline-2">
+<h2 id="org08ae704">Getting Started with Tracing</h2>
+<div class="outline-text-2" id="text-org08ae704">
+<p>
+You can get started installing the crate into your project.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">cargo add tracing
+</pre>
+</div>
+
+<p>
+If your program copiles to a binary (not a library), you need to install a logging subscriber.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">cargo add tracing-subscriber
+</pre>
+</div>
+
+<p>
+And now we need to implement it in our project
+</p>
+<div class="org-src-container">
+<pre class="src src-rust"><span class="org-keyword">use</span> <span class="org-constant">tracing</span>;
+<span class="org-keyword">use</span> <span class="org-constant">tracing_subscriber</span>;
+
+<span class="org-keyword">fn</span> <span class="org-function-name">main</span>() {
+    <span class="org-constant">tracing</span>::<span class="org-constant">subscriber</span>::set_global_default(
+        <span class="org-constant">tracing_subscriber</span>::<span class="org-type">FmtSubscriber</span>::new()
+    ).expect(<span class="org-string">"setting default subscriber failed"</span>);
+
+    <span class="org-keyword">let</span> <span class="org-variable-name">result</span> = compute(5);
+    <span class="org-constant">tracing</span>::<span class="org-preprocessor">info!</span>(<span class="org-string">"The result is {}"</span>, result);
+}
+
+<span class="org-preprocessor">#[tracing::instrument(ret)]</span>
+<span class="org-keyword">fn</span> <span class="org-function-name">compute</span>(<span class="org-variable-name">n</span>: <span class="org-type">i32</span>) -&gt; <span class="org-type">i32</span> {
+    <span class="org-keyword">if</span> n &gt; 10 {
+        <span class="org-constant">tracing</span>::<span class="org-preprocessor">warn!</span>(<span class="org-string">"The number is greater than 10"</span>);
+    } <span class="org-keyword">else</span> <span class="org-keyword">if</span> n &lt; 1 {
+        <span class="org-constant">tracing</span>::<span class="org-preprocessor">error!</span>(<span class="org-string">"The number is less than 1"</span>);
+    }
+    n * 2
+}
+</pre>
+</div>
+
+<p>
+In the above code, we first set a default subscriber for the tracing events.
+Then, we use the <code>info!</code> macro to record an event at the info level. In the compute function, we use the trace!, <code>warn!</code>, and <code>error!</code> macros to record events at different levels based on the value of n.
+We also use <code>instrument</code> macro to record the return and the params of the compute function, it can be used to record errors or other fields in Span increasing even more observability.
+</p>
+
+<p>
+This simple example show the power of tracing crate and how we can use it to improve observability in Rust repositories, in more complex systems we can add <code>tracing-futures</code> and <code>tracing-serde</code> to improve serializing and provides instrumenting for Futures, but I will cover this topics in another post.
+</p>
+
+<p>
+Thanks for reading! 
+</p>
+</div>
+</section>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://tokio.rs/tokio/topics/tracing">Tracing toping on tokio.rs</a>
+</p></div></div>
+
+
+</div>
+</div></main>
+<footer id="postamble" class="status">
+<div class='footer'>
+  Copyright © 2024 <a href='mailto:matheusalmeida025@gmail.com'>Matheus Almeida.</a><br>
+  Template by <a href='https://gitlab.com/psachin/psachin.gitlab.io/'>Sachin Patil</a> <br>
+  Last updated on Jun 07, 2024. Generated using <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4).
+</div>
+</footer>
+</body>
+</html>
