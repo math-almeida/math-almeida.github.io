@@ -1,0 +1,99 @@
+#+title: Improve observability in rust repositories
+#+date: <2024-06-07 Fri>
+#+filetags: rust observability tracing improvement
+#+setupfile: ../org-templates/post.org
+
+* Overview
+In complex systems, such as distributed software and cloud infrastructures, understanding how the system is behaving can be a challenge.
+Observability allows us to understand a system from the outside, allowing us to ask questions about that system without knowing its inner workings.
+Furthermore, it allows us to easily solve and deal with new problems (ie. “unknown unknowns”) and helps us answer the question: “Why is this happening?”
+A lack of observability means there are certain states or behaviors that cannot be discerned or predicted just by looking at its outputs.
+
+* Why it's important?
+Even though the benefits of having Observability are apparent, many organizations do not prioritize its implementation.
+The issue lies in outdated assumptions about how systems function. Your application is no longer a single entity residing within your control but a vast, ever-changing ecosystem of services, often dependent on elements you don't own. Failures are always present at all stages of the project and it is impossible to predict all possible failures that may occur.
+
+* The pillars
+Observability is based on three fundamental elements: logs, metrics and tracing, known as the three pillars of Observability.
+
+** Logs
+Logs are records of events that occur within a system. They provide details about activities, errors, exceptions, and other information relevant to the functioning of the system.
+
+** Tracing
+Tracing involves tracking individual requests as they move through the entire system. This allows you to understand the path a request follows, including all interactions between the different components of the system.
+
+** Metrics
+Metrics are quantitative measurements that provide information about the performance and behavior of a system over a given period of time. They can include information such as CPU usage, API response time, number of requests per second, among others.
+
+* Core concepts
+** Structured Log
+It consists of recording important events in systems in an organized and consistent way. These records follow a standardized format, facilitating analysis and extracting insights into system behavior.
+
+** Log centralization
+It involves sending logs from all system components to a centralized location where they can be efficiently stored, searched, and analyzed.
+
+** Distributed Tracing
+ It involves instrumenting system-wide requests to track their path as they traverse various components. This is typically done by generating unique tracking IDs that are propagated throughout the request flow.
+
+** Metrics Collection
+ It consists of regularly collecting performance metrics, such as CPU usage, memory usage, request response time, among others. These metrics are generally collected at regular intervals and stored for later analysis.
+ 
+** Alerts and Corrective Actions
+ It consists of configuring alerts based on specific metrics or events that indicate problems or anomalies in the system. When an alert is triggered, corrective actions can be automatically taken to mitigate the issue.
+
+* Observability in Rust
+One amazing crate who provides APIs necessary for instrumenting libraries and applications to emit trace data is [[https://docs.rs/tracing/latest/tracing/][tracing]].
+Developed by the Tokio team, it's fully built up from the ground for async which is perfect for web applications with Rust logs.
+It uses the concept of "spans" which are used to record the flow of execution through a program.
+
+You can use =tracing= to [fn:tokio]:
+- Emit distributed traces to an [[https://docs.rs/tracing-opentelemetry/latest/tracing_opentelemetry/][Open Telemetry]] collector.
+- Debug your application with [[https://docs.rs/console-subscriber/latest/console_subscriber/][Tokio Console]].
+- Log to [[https://docs.rs/tracing-subscriber/latest/tracing_subscriber/fmt/index.html][stdout]], [[https://docs.rs/tracing-appender/latest/tracing_appender/][log file]] or [[https://docs.rs/tracing-journald/latest/tracing_journald/][journalId]].
+- [[https://docs.rs/tracing-timing/latest/tracing_timing/][profile]] where your application is spending time.
+
+* Getting Started with Tracing
+You can get started installing the crate into your project.
+#+begin_src sh
+cargo add tracing
+#+end_src
+
+If your program copiles to a binary (not a library), you need to install a logging subscriber.
+#+begin_src sh
+cargo add tracing-subscriber
+#+end_src
+
+And now we need to implement it in our project
+#+begin_src rust
+  use tracing;
+  use tracing_subscriber;
+
+  fn main() {
+      tracing::subscriber::set_global_default(
+          tracing_subscriber::FmtSubscriber::new()
+      ).expect("setting default subscriber failed");
+
+      let result = compute(5);
+      tracing::info!("The result is {}", result);
+  }
+
+  #[tracing::instrument(ret)]
+  fn compute(n: i32) -> i32 {
+      if n > 10 {
+          tracing::warn!("The number is greater than 10");
+      } else if n < 1 {
+          tracing::error!("The number is less than 1");
+      }
+      n * 2
+  }
+#+end_src
+
+In the above code, we first set a default subscriber for the tracing events.
+Then, we use the =info!= macro to record an event at the info level. In the compute function, we use the trace!, =warn!=, and =error!= macros to record events at different levels based on the value of n.
+We also use =instrument= macro to record the return and the params of the compute function, it can be used to record errors or other fields in Span increasing even more observability.
+
+This simple example show the power of tracing crate and how we can use it to improve observability in Rust repositories, in more complex systems we can add =tracing-futures= and =tracing-serde= to improve serializing and provides instrumenting for Futures, but I will cover this topics in another post.
+
+Thanks for reading! 
+
+[fn:tokio] [[https://tokio.rs/tokio/topics/tracing][Tracing toping on tokio.rs]]
