@@ -66,9 +66,9 @@
 <span class="subtitle">Published on Jun 07, 2024 by math-almeida.</span>
 </h1>
 
-<section id="outline-container-org5300cfd" class="outline-2">
-<h2 id="org5300cfd">Overview</h2>
-<div class="outline-text-2" id="text-org5300cfd">
+<section id="outline-container-org8357620" class="outline-2">
+<h2 id="org8357620">Overview</h2>
+<div class="outline-text-2" id="text-org8357620">
 <p>
 In complex systems, such as distributed software and cloud infrastructures, understanding how the system is behaving can be a challenge.
 Observability allows us to understand a system from the outside, allowing us to ask questions about that system without knowing its inner workings.
@@ -78,9 +78,9 @@ A lack of observability means there are certain states or behaviors that cannot 
 </div>
 </section>
 
-<section id="outline-container-org0274ada" class="outline-2">
-<h2 id="org0274ada">Why it&rsquo;s important?</h2>
-<div class="outline-text-2" id="text-org0274ada">
+<section id="outline-container-org29c7e2a" class="outline-2">
+<h2 id="org29c7e2a">Why it&rsquo;s important?</h2>
+<div class="outline-text-2" id="text-org29c7e2a">
 <p>
 Even though the benefits of having Observability are apparent, many organizations do not prioritize its implementation.
 The issue lies in outdated assumptions about how systems function. Your application is no longer a single entity residing within your control but a vast, ever-changing ecosystem of services, often dependent on elements you don&rsquo;t own. Failures are always present at all stages of the project and it is impossible to predict all possible failures that may occur.
@@ -88,35 +88,35 @@ The issue lies in outdated assumptions about how systems function. Your applicat
 </div>
 </section>
 
-<section id="outline-container-orgfbe266a" class="outline-2">
-<h2 id="orgfbe266a">The pillars</h2>
-<div class="outline-text-2" id="text-orgfbe266a">
+<section id="outline-container-org5eae116" class="outline-2">
+<h2 id="org5eae116">The pillars</h2>
+<div class="outline-text-2" id="text-org5eae116">
 <p>
 Observability is based on three fundamental elements: logs, metrics and tracing, known as the three pillars of Observability.
 </p>
 </div>
 
-<div id="outline-container-org5674864" class="outline-3">
-<h3 id="org5674864">Logs</h3>
-<div class="outline-text-3" id="text-org5674864">
+<div id="outline-container-org2539297" class="outline-3">
+<h3 id="org2539297">Logs</h3>
+<div class="outline-text-3" id="text-org2539297">
 <p>
 Logs are records of events that occur within a system. They provide details about activities, errors, exceptions, and other information relevant to the functioning of the system.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8563973" class="outline-3">
-<h3 id="org8563973">Tracing</h3>
-<div class="outline-text-3" id="text-org8563973">
+<div id="outline-container-org455af85" class="outline-3">
+<h3 id="org455af85">Tracing</h3>
+<div class="outline-text-3" id="text-org455af85">
 <p>
 Tracing involves tracking individual requests as they move through the entire system. This allows you to understand the path a request follows, including all interactions between the different components of the system.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org131b9d4" class="outline-3">
-<h3 id="org131b9d4">Metrics</h3>
-<div class="outline-text-3" id="text-org131b9d4">
+<div id="outline-container-org7bebbeb" class="outline-3">
+<h3 id="org7bebbeb">Metrics</h3>
+<div class="outline-text-3" id="text-org7bebbeb">
 <p>
 Metrics are quantitative measurements that provide information about the performance and behavior of a system over a given period of time. They can include information such as CPU usage, API response time, number of requests per second, among others.
 </p>
@@ -124,49 +124,49 @@ Metrics are quantitative measurements that provide information about the perform
 </div>
 </section>
 
-<section id="outline-container-org5ca697a" class="outline-2">
-<h2 id="org5ca697a">Core concepts</h2>
-<div class="outline-text-2" id="text-org5ca697a">
+<section id="outline-container-org42fed99" class="outline-2">
+<h2 id="org42fed99">Core concepts</h2>
+<div class="outline-text-2" id="text-org42fed99">
 </div>
-<div id="outline-container-org8f51418" class="outline-3">
-<h3 id="org8f51418">Structured Log</h3>
-<div class="outline-text-3" id="text-org8f51418">
+<div id="outline-container-orgcf72f81" class="outline-3">
+<h3 id="orgcf72f81">Structured Log</h3>
+<div class="outline-text-3" id="text-orgcf72f81">
 <p>
 It consists of recording important events in systems in an organized and consistent way. These records follow a standardized format, facilitating analysis and extracting insights into system behavior.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgbede6e7" class="outline-3">
-<h3 id="orgbede6e7">Log centralization</h3>
-<div class="outline-text-3" id="text-orgbede6e7">
+<div id="outline-container-org1081af5" class="outline-3">
+<h3 id="org1081af5">Log centralization</h3>
+<div class="outline-text-3" id="text-org1081af5">
 <p>
 It involves sending logs from all system components to a centralized location where they can be efficiently stored, searched, and analyzed.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org3695624" class="outline-3">
-<h3 id="org3695624">Distributed Tracing</h3>
-<div class="outline-text-3" id="text-org3695624">
+<div id="outline-container-org5cf11ef" class="outline-3">
+<h3 id="org5cf11ef">Distributed Tracing</h3>
+<div class="outline-text-3" id="text-org5cf11ef">
 <p>
 It involves instrumenting system-wide requests to track their path as they traverse various components. This is typically done by generating unique tracking IDs that are propagated throughout the request flow.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org9eaa287" class="outline-3">
-<h3 id="org9eaa287">Metrics Collection</h3>
-<div class="outline-text-3" id="text-org9eaa287">
+<div id="outline-container-org715d937" class="outline-3">
+<h3 id="org715d937">Metrics Collection</h3>
+<div class="outline-text-3" id="text-org715d937">
 <p>
 It consists of regularly collecting performance metrics, such as CPU usage, memory usage, request response time, among others. These metrics are generally collected at regular intervals and stored for later analysis.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org182abbe" class="outline-3">
-<h3 id="org182abbe">Alerts and Corrective Actions</h3>
-<div class="outline-text-3" id="text-org182abbe">
+<div id="outline-container-orgfab2a59" class="outline-3">
+<h3 id="orgfab2a59">Alerts and Corrective Actions</h3>
+<div class="outline-text-3" id="text-orgfab2a59">
 <p>
 It consists of configuring alerts based on specific metrics or events that indicate problems or anomalies in the system. When an alert is triggered, corrective actions can be automatically taken to mitigate the issue.
 </p>
@@ -174,9 +174,9 @@ It consists of configuring alerts based on specific metrics or events that indic
 </div>
 </section>
 
-<section id="outline-container-org9cd7976" class="outline-2">
-<h2 id="org9cd7976">Observability in Rust</h2>
-<div class="outline-text-2" id="text-org9cd7976">
+<section id="outline-container-org5f78f74" class="outline-2">
+<h2 id="org5f78f74">Observability in Rust</h2>
+<div class="outline-text-2" id="text-org5f78f74">
 <p>
 One amazing crate who provides APIs necessary for instrumenting libraries and applications to emit trace data is <a href="https://docs.rs/tracing/latest/tracing/">tracing</a>.
 Developed by the Tokio team, it&rsquo;s fully built up from the ground for async which is perfect for web applications with Rust logs.
@@ -195,9 +195,9 @@ You can use <code>tracing</code> to <sup><a id="fnr.1" class="footref" href="#fn
 </div>
 </section>
 
-<section id="outline-container-org392da87" class="outline-2">
-<h2 id="org392da87">Getting Started with Tracing</h2>
-<div class="outline-text-2" id="text-org392da87">
+<section id="outline-container-org6a1acaf" class="outline-2">
+<h2 id="org6a1acaf">Getting Started with Tracing</h2>
+<div class="outline-text-2" id="text-org6a1acaf">
 <p>
 You can get started installing the crate into your project.
 </p>
