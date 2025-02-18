@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- Feb 18, 2025 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My journey into Arch and Hyprland</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="math-almeida" />
+<link rel='icon' type='image/png' href='/images/favicon.png'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='preconnect' href='https://fonts.gstatic.com'>
+<link href='https://code.cdn.mozilla.net/fonts/zilla-slab.css' rel='stylesheet'>
+<link rel='stylesheet' href='/css/site.css?v=2' type='text/css'/>
+<link rel='stylesheet' href='/css/custom.css' type='text/css'/>
+<link rel='stylesheet' href='/css/syntax-coloring.css' type='text/css'/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="/"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><header id="top" class="status">
+<div class='intro'>
+  <img src='/images/about/profile.png' alt='Torresmo' class='no-border'/>
+  <h1>
+    <span class="gray">Torresmo</span>
+  </h1>
+</div>
+
+<div class='nav'>
+<ul>
+<li><a href='/'>Home</a>.</li>
+<li><a href='https://github.com/math-almeida'>GitHub</a>.</li>
+<li><a href='/about/'>About</a></li>
+</ul>
+</div>
+</header>
+<main id="content">
+<h1 class="title">My journey into Arch and Hyprland
+<br />
+<span class="subtitle">Published on Feb 15, 2025 by math-almeida.</span>
+</h1>
+<p>
+A few weeks ago I was using my KDE manjaro and saw a post in X about Arch Linux and hyprland who caugth my atention. The post was a video (I didn&rsquo;t find the video for reference) showing a specific configuration and I was absolutely astonished about how the system looks clean and beautifull. In this moment I decided to build my configuration using Arch and Hyprland.
+</p>
+
+<p>
+This journey was divided into a few small chapters:
+</p>
+
+<section id="outline-container-orgf4170c5" class="outline-2">
+<h2 id="orgf4170c5">Write and customize Hyprland configuration</h2>
+<div class="outline-text-2" id="text-orgf4170c5">
+<p>
+I started writing my configuration using before using it. This give me more control about what I am doing and what I can do next without break the system. I used a few dotfiles as example and tested their solutions to understand what I want in my system. Between these dotfiles I want to reference:
+</p>
+<ul class="org-ul">
+<li><a href="https://github.com/outragedline/dotfiles">Outragedline dotfiles</a></li>
+<li><a href="https://github.com/SolDoesTech/hyprland">SolDoesTech dotfiles</a></li>
+</ul>
+<p>
+These dotfiles gave me a great idea of what I want and how to organize things. A special thanks to Outragedline who become a friend and supports me to create this configuration.
+</p>
+
+<p>
+So, after researching about the packages I create a few collection of them to use:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/kovidgoyal/kitty">Kitty</a>, a free and open source GPU accelerated terminal emulator written in C and Python.</li>
+<li><a href="https://github.com/ClementTsang/bottom">Bottom</a>, a customizable system monitor for terminal inspired by htop and written in Rust.</li>
+<li><a href="https://github.com/davatorium/rofi">Rofi</a>, a window switcher and application launcher for creating menus written in C.</li>
+<li><a href="https://github.com/swaywm/swaylock">Swaylock</a>, a screen locker for Wayland written in C.</li>
+<li><a href="https://github.com/Alexays/Waybar">Waybar</a>, a customizable Wayland bar written in C++.</li>
+<li><p>
+<a href="https://github.com/sxyazi/yazi">Yazi</a>, a amazing terminal file manager written in Rust.
+</p>
+
+<p>
+This part is really annoying because it&rsquo;s writting and testing, there&rsquo;s no much to talk about it so I will just drop where I put my <a href="https://github.com/math-almeida/dotfiles/tree/master/Desktop">configurations</a> in dotfiles as reference.
+</p></li>
+</ul>
+</div>
+</section>
+
+<section id="outline-container-org2036a39" class="outline-2">
+<h2 id="org2036a39">Create script for automatize instalation and future uses</h2>
+<div class="outline-text-2" id="text-org2036a39">
+<p>
+Since the begining of my dotfiles I created a Makefile and a few helpers to install the intire system in the easy way, with the desktop configuration this cannot be different.
+The first thing I created is a <a href="https://github.com/math-almeida/dotfiles/blob/master/packages.yaml">packages.yaml</a> file with all our packages to install, so we can modify only in one place to reflect in specific steps on installation. But it leads one problem: How I can read the yaml keys without great dependencies or complicated logic?
+My solution was installing <a href="https://github.com/mikefarah/yq">yq</a> as dependency process the file so we can format the arguments and pass to pacman or yay without problem. 
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">@yq <span class="org-string">'.yay.hypr'</span> packages.yaml | tr -d <span class="org-string">'[],"'</span> | xargs yay -S --noconfirm
+</pre>
+</div>
+<p>
+After this we need to symlink our newest configuration in the correct places, for this I have a <a href="https://github.com/math-almeida/dotfiles/blob/master/symlinks.rb">symlink</a> script written in ruby (thanks vinibispo) to symlink all our configuration files, we just need to put the file in the desktop root and run the script from there.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">cp symlinks.rb Desktop &amp;&amp; <span class="org-builtin">cd</span> Desktop &amp;&amp; ruby symlinks.rb &amp;&amp; rm symlinks.rb
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orga9be625" class="outline-2">
+<h2 id="orga9be625">Installing Arch</h2>
+<div class="outline-text-2" id="text-orga9be625">
+<p>
+First we need to dowload the iso file in <a href="https://archlinux.org/download/">arch website</a>. I use the unicamp mirror in Brazil since I live here :)
+I prepared beforehand a bootlabe pen-drive using <a href="https://www.ventoy.net/en/index.html">ventoy</a> (thanks Rick) an amazing open source tool who can store multiple iso files and also normal files and act like a normal pen drive.
+</p>
+
+<p>
+After rebooting the computer and prompt to arch iso, we face arch installation terminal who runs commands as root to make this inital configuration. Arch have a instalation script called <code>archinstall</code> but before run it we need to connect with internet, we can do it calling iwctl (iNet wireless daemon).
+</p>
+<ul class="org-ul">
+<li><p>
+First we need to identify our network device
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ip addr show
+</pre>
+</div>
+<p>
+Mine is <code>wlan0</code>
+</p>
+
+<ul class="org-ul">
+<li><p>
+Second we need to identify the available wifi networks
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">iwctl station wlan0 get-networks
+</pre>
+</div></li>
+</ul></li>
+</ul>
+<p>
+This command will show all wifi networks and SSID near you
+</p>
+
+<ul class="org-ul">
+<li><p>
+Finally we connect into wifi running
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">iwctl --passphrase <span class="org-string">"your-passphrase"</span> station wlan0 connect your-wifi-network
+</pre>
+</div></li>
+</ul>
+<p>
+And it&rsquo;s done! You can run <code>ip addr show</code> again to see if everything is ok.
+</p>
+
+<p>
+The second step is run the installer <code>archinstall</code> script who gave us a simple interface to choose how we install our system.
+For reference I will write what I choose for a minimal instalation.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">{
+    <span class="org-string">"additional-repositories"</span>: [
+        <span class="org-string">"multilib"</span>
+    ],
+    <span class="org-string">"archinstall-language"</span>: <span class="org-string">"English"</span>,
+    <span class="org-string">"audio_config"</span>: {
+        <span class="org-string">"audio"</span>: <span class="org-string">"pipewire"</span>
+    },
+    <span class="org-string">"bootloader"</span>: <span class="org-string">"Systemd-boot"</span>,
+    <span class="org-string">"config_version"</span>: <span class="org-string">"3.0.2"</span>,
+    <span class="org-string">"debug"</span>: false,
+    <span class="org-string">"disk_config"</span>: {
+        <span class="org-string">"config_type"</span>: <span class="org-string">"default_layout"</span>,
+        <span class="org-string">"device_modifications"</span>: [
+            {
+                <span class="org-string">"device"</span>: <span class="org-string">"/dev/nvme0n1"</span>,
+                <span class="org-string">"partitions"</span>: [
+                    {
+                        <span class="org-string">"btrfs"</span>: [],
+                        <span class="org-string">"dev_path"</span>: null,
+                        <span class="org-string">"flags"</span>: [
+                            <span class="org-string">"boot"</span>,
+                            <span class="org-string">"esp"</span>
+                        ],
+                        <span class="org-string">"fs_type"</span>: <span class="org-string">"fat32"</span>,
+                        <span class="org-string">"mount_options"</span>: [],
+                        <span class="org-string">"mountpoint"</span>: <span class="org-string">"/boot"</span>,
+                        <span class="org-string">"size"</span>: {
+                            <span class="org-string">"sector_size"</span>: {
+                                <span class="org-string">"unit"</span>: <span class="org-string">"B"</span>,
+                                <span class="org-string">"value"</span>: 512
+                            },
+                            <span class="org-string">"unit"</span>: <span class="org-string">"GiB"</span>,
+                            <span class="org-string">"value"</span>: 1
+                        },
+                        <span class="org-string">"start"</span>: {
+                            <span class="org-string">"sector_size"</span>: {
+                                <span class="org-string">"unit"</span>: <span class="org-string">"B"</span>,
+                                <span class="org-string">"value"</span>: 512
+                            },
+                            <span class="org-string">"unit"</span>: <span class="org-string">"MiB"</span>,
+                            <span class="org-string">"value"</span>: 1
+                        },
+                        <span class="org-string">"status"</span>: <span class="org-string">"create"</span>,
+                        <span class="org-string">"type"</span>: <span class="org-string">"primary"</span>
+                    },
+                    {
+                        <span class="org-string">"btrfs"</span>: [],
+                        <span class="org-string">"dev_path"</span>: null,
+                        <span class="org-string">"flags"</span>: [],
+                        <span class="org-string">"fs_type"</span>: <span class="org-string">"ext4"</span>,
+                        <span class="org-string">"mount_options"</span>: [],
+                        <span class="org-string">"mountpoint"</span>: <span class="org-string">"/"</span>,
+                        <span class="org-string">"size"</span>: {
+                            <span class="org-string">"sector_size"</span>: {
+                                <span class="org-string">"unit"</span>: <span class="org-string">"B"</span>,
+                                <span class="org-string">"value"</span>: 512
+                            },
+                            <span class="org-string">"unit"</span>: <span class="org-string">"B"</span>,
+                        },
+                        <span class="org-string">"start"</span>: {
+                            <span class="org-string">"sector_size"</span>: {
+                                <span class="org-string">"unit"</span>: <span class="org-string">"B"</span>,
+                                <span class="org-string">"value"</span>: 512
+                            },
+                            <span class="org-string">"unit"</span>: <span class="org-string">"B"</span>,
+                        },
+                        <span class="org-string">"status"</span>: <span class="org-string">"create"</span>,
+                        <span class="org-string">"type"</span>: <span class="org-string">"primary"</span>
+                    }
+                ],
+                <span class="org-string">"wipe"</span>: true
+            }
+        ]
+    },
+    <span class="org-string">"hostname"</span>: <span class="org-string">"archlinux"</span>,
+    <span class="org-string">"kernels"</span>: [
+        <span class="org-string">"linux"</span>
+    ],
+    <span class="org-string">"locale_config"</span>: {
+        <span class="org-string">"kb_layout"</span>: <span class="org-string">"us"</span>,
+        <span class="org-string">"sys_enc"</span>: <span class="org-string">"UTF-8"</span>,
+        <span class="org-string">"sys_lang"</span>: <span class="org-string">"en_US"</span>
+    },
+    <span class="org-string">"mirror_config"</span>: {
+        <span class="org-string">"custom_mirrors"</span>: [],
+        <span class="org-string">"mirror_regions"</span>: {
+            <span class="org-string">"Brazil"</span>: [
+                <span class="org-string">"http://archlinux.c3sl.ufpr.br/$repo/os/$arch"</span>,
+                <span class="org-string">"https://archlinux.c3sl.ufpr.br/$repo/os/$arch"</span>,
+                <span class="org-string">"http://br.mirrors.cicku.me/archlinux/$repo/os/$arch"</span>,
+                <span class="org-string">"https://br.mirrors.cicku.me/archlinux/$repo/os/$arch"</span>,
+                <span class="org-string">"http://mirror.ufam.edu.br/archlinux/$repo/os/$arch"</span>,
+                <span class="org-string">"http://mirror.ufscar.br/archlinux/$repo/os/$arch"</span>,
+                <span class="org-string">"https://mirror.ufscar.br/archlinux/$repo/os/$arch"</span>,
+                <span class="org-string">"http://mirrors.ic.unicamp.br/archlinux/$repo/os/$arch"</span>,
+                <span class="org-string">"https://mirrors.ic.unicamp.br/archlinux/$repo/os/$arch"</span>
+            ]
+        }
+    },
+    <span class="org-string">"mount_point"</span>: <span class="org-string">"/mnt/archinstall"</span>,
+    <span class="org-string">"network_config"</span>: {
+        <span class="org-string">"type"</span>: <span class="org-string">"nm"</span>
+    },
+    <span class="org-string">"no_pkg_lookups"</span>: false,
+    <span class="org-string">"ntp"</span>: true,
+    <span class="org-string">"offline"</span>: false,
+    <span class="org-string">"packages"</span>: [],
+    <span class="org-string">"parallel downloads"</span>: 0,
+    <span class="org-string">"profile_config"</span>: {
+        <span class="org-string">"gfx_driver"</span>: null,
+        <span class="org-string">"greeter"</span>: null,
+        <span class="org-string">"profile"</span>: {
+            <span class="org-string">"custom_settings"</span>: {},
+            <span class="org-string">"details"</span>: [],
+            <span class="org-string">"main"</span>: <span class="org-string">"Minimal"</span>
+        }
+    },
+    <span class="org-string">"save_config"</span>: null,
+    <span class="org-string">"script"</span>: <span class="org-string">"guided"</span>,
+    <span class="org-string">"silent"</span>: false,
+    <span class="org-string">"skip_ntp"</span>: false,
+    <span class="org-string">"skip_version_check"</span>: false,
+    <span class="org-string">"swap"</span>: true,
+    <span class="org-string">"timezone"</span>: <span class="org-string">"America/Sao_Paulo"</span>,
+    <span class="org-string">"uki"</span>: false,
+    <span class="org-string">"version"</span>: <span class="org-string">"3.0.2"</span>
+}
+</pre>
+</div>
+
+<p>
+I removed a few IDs and values from this json so I recomend to use just for reference :)
+After complete the instalation we need to reboot our system.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">reboot
+</pre>
+</div>
+
+<p>
+After the rebooting the system will prompt to Arch login, we can use the login created in the archinstall script passing the username and password. After this we are inside a minimal Arch configuration! \o/
+</p>
+
+<p>
+I create a script for install my personal configuration so I will use it to complete the installation and install hyprland and their dependences.
+First we need to connect into internet, we can use nmcli (NetworkManager)
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">nmcli device wifi connect your-wifi-network password your-password
+</pre>
+</div>
+<p>
+After connecting with internet we can use pacman to install git.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">sudo pacman -S git --noconfirm
+</pre>
+</div>
+<p>
+And with git installed we can clone our dotfiles repository to use in our configuration.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">git clone https://github.com/math-almeida/dotfiles.git
+</pre>
+</div>
+<p>
+With this repository we can navigate to his root with <code>cd dotfiles</code> and use the <code>build</code> command from our Makefile.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">make build
+</pre>
+</div>
+<p>
+This will install and configure the rest of our system, at the end of script we can just run <code>hyprland</code> and it&rsquo;s all done!
+</p>
+</div>
+</section>
+</main>
+<footer id="postamble" class="status">
+<div class='footer'>
+  Copyright © 2024 <a href='mailto:matheusalmeida025@gmail.com'>Matheus Almeida.</a><br>
+  Template by <a href='https://gitlab.com/psachin/psachin.gitlab.io/'>Sachin Patil</a> <br>
+  Last updated on Feb 18, 2025. Generated using <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4).
+</div>
+</footer>
+</body>
+</html>

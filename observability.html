@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- Jun 07, 2024 -->
+<!-- Feb 18, 2025 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Improve observability in rust repositories</title>
@@ -66,9 +66,9 @@
 <span class="subtitle">Published on Jun 07, 2024 by math-almeida.</span>
 </h1>
 
-<section id="outline-container-org8a9000a" class="outline-2">
-<h2 id="org8a9000a">Overview</h2>
-<div class="outline-text-2" id="text-org8a9000a">
+<section id="outline-container-org9f0c3ea" class="outline-2">
+<h2 id="org9f0c3ea">Overview</h2>
+<div class="outline-text-2" id="text-org9f0c3ea">
 <p>
 In complex systems, such as distributed software and cloud infrastructures, understanding how the system is behaving can be a challenge.
 Observability allows us to understand a system from the outside, allowing us to ask questions about that system without knowing its inner workings.
@@ -78,9 +78,9 @@ A lack of observability means there are certain states or behaviors that cannot 
 </div>
 </section>
 
-<section id="outline-container-orgf3479a0" class="outline-2">
-<h2 id="orgf3479a0">Why it&rsquo;s important?</h2>
-<div class="outline-text-2" id="text-orgf3479a0">
+<section id="outline-container-org76f1958" class="outline-2">
+<h2 id="org76f1958">Why it&rsquo;s important?</h2>
+<div class="outline-text-2" id="text-org76f1958">
 <p>
 Even though the benefits of having Observability are apparent, many organizations do not prioritize its implementation.
 The issue lies in outdated assumptions about how systems function. Your application is no longer a single entity residing within your control but a vast, ever-changing ecosystem of services, often dependent on elements you don&rsquo;t own. Failures are always present at all stages of the project and it is impossible to predict all possible failures that may occur.
@@ -88,35 +88,35 @@ The issue lies in outdated assumptions about how systems function. Your applicat
 </div>
 </section>
 
-<section id="outline-container-orga76eeb9" class="outline-2">
-<h2 id="orga76eeb9">The pillars</h2>
-<div class="outline-text-2" id="text-orga76eeb9">
+<section id="outline-container-orgcc2174b" class="outline-2">
+<h2 id="orgcc2174b">The pillars</h2>
+<div class="outline-text-2" id="text-orgcc2174b">
 <p>
 Observability is based on three fundamental elements: logs, metrics and tracing, known as the three pillars of Observability.
 </p>
 </div>
 
-<div id="outline-container-org9c0e8c7" class="outline-3">
-<h3 id="org9c0e8c7">Logs</h3>
-<div class="outline-text-3" id="text-org9c0e8c7">
+<div id="outline-container-orgeea6676" class="outline-3">
+<h3 id="orgeea6676">Logs</h3>
+<div class="outline-text-3" id="text-orgeea6676">
 <p>
 Logs are records of events that occur within a system. They provide details about activities, errors, exceptions, and other information relevant to the functioning of the system.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgfd860a8" class="outline-3">
-<h3 id="orgfd860a8">Tracing</h3>
-<div class="outline-text-3" id="text-orgfd860a8">
+<div id="outline-container-org31508ce" class="outline-3">
+<h3 id="org31508ce">Tracing</h3>
+<div class="outline-text-3" id="text-org31508ce">
 <p>
 Tracing involves tracking individual requests as they move through the entire system. This allows you to understand the path a request follows, including all interactions between the different components of the system.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2fa2c11" class="outline-3">
-<h3 id="org2fa2c11">Metrics</h3>
-<div class="outline-text-3" id="text-org2fa2c11">
+<div id="outline-container-org048babb" class="outline-3">
+<h3 id="org048babb">Metrics</h3>
+<div class="outline-text-3" id="text-org048babb">
 <p>
 Metrics are quantitative measurements that provide information about the performance and behavior of a system over a given period of time. They can include information such as CPU usage, API response time, number of requests per second, among others.
 </p>
@@ -124,49 +124,49 @@ Metrics are quantitative measurements that provide information about the perform
 </div>
 </section>
 
-<section id="outline-container-org19cf5ec" class="outline-2">
-<h2 id="org19cf5ec">Core concepts</h2>
-<div class="outline-text-2" id="text-org19cf5ec">
+<section id="outline-container-org3994de4" class="outline-2">
+<h2 id="org3994de4">Core concepts</h2>
+<div class="outline-text-2" id="text-org3994de4">
 </div>
-<div id="outline-container-orgf199f13" class="outline-3">
-<h3 id="orgf199f13">Structured Log</h3>
-<div class="outline-text-3" id="text-orgf199f13">
+<div id="outline-container-orgaff6085" class="outline-3">
+<h3 id="orgaff6085">Structured Log</h3>
+<div class="outline-text-3" id="text-orgaff6085">
 <p>
 It consists of recording important events in systems in an organized and consistent way. These records follow a standardized format, facilitating analysis and extracting insights into system behavior.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org86c3afb" class="outline-3">
-<h3 id="org86c3afb">Log centralization</h3>
-<div class="outline-text-3" id="text-org86c3afb">
+<div id="outline-container-org61efc2b" class="outline-3">
+<h3 id="org61efc2b">Log centralization</h3>
+<div class="outline-text-3" id="text-org61efc2b">
 <p>
 It involves sending logs from all system components to a centralized location where they can be efficiently stored, searched, and analyzed.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgc09c05e" class="outline-3">
-<h3 id="orgc09c05e">Distributed Tracing</h3>
-<div class="outline-text-3" id="text-orgc09c05e">
+<div id="outline-container-orge51483c" class="outline-3">
+<h3 id="orge51483c">Distributed Tracing</h3>
+<div class="outline-text-3" id="text-orge51483c">
 <p>
 It involves instrumenting system-wide requests to track their path as they traverse various components. This is typically done by generating unique tracking IDs that are propagated throughout the request flow.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org3c94b06" class="outline-3">
-<h3 id="org3c94b06">Metrics Collection</h3>
-<div class="outline-text-3" id="text-org3c94b06">
+<div id="outline-container-org9a46d42" class="outline-3">
+<h3 id="org9a46d42">Metrics Collection</h3>
+<div class="outline-text-3" id="text-org9a46d42">
 <p>
 It consists of regularly collecting performance metrics, such as CPU usage, memory usage, request response time, among others. These metrics are generally collected at regular intervals and stored for later analysis.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org42173c5" class="outline-3">
-<h3 id="org42173c5">Alerts and Corrective Actions</h3>
-<div class="outline-text-3" id="text-org42173c5">
+<div id="outline-container-org1b4bb01" class="outline-3">
+<h3 id="org1b4bb01">Alerts and Corrective Actions</h3>
+<div class="outline-text-3" id="text-org1b4bb01">
 <p>
 It consists of configuring alerts based on specific metrics or events that indicate problems or anomalies in the system. When an alert is triggered, corrective actions can be automatically taken to mitigate the issue.
 </p>
@@ -174,9 +174,9 @@ It consists of configuring alerts based on specific metrics or events that indic
 </div>
 </section>
 
-<section id="outline-container-org9d7e8b0" class="outline-2">
-<h2 id="org9d7e8b0">Observability in Rust</h2>
-<div class="outline-text-2" id="text-org9d7e8b0">
+<section id="outline-container-org0bc5c53" class="outline-2">
+<h2 id="org0bc5c53">Observability in Rust</h2>
+<div class="outline-text-2" id="text-org0bc5c53">
 <p>
 One amazing crate who provides APIs necessary for instrumenting libraries and applications to emit trace data is <a href="https://docs.rs/tracing/latest/tracing/">tracing</a>.
 Developed by the Tokio team, it&rsquo;s fully built up from the ground for async which is perfect for web applications with Rust logs.
@@ -195,9 +195,9 @@ You can use <code>tracing</code> to <sup><a id="fnr.1" class="footref" href="#fn
 </div>
 </section>
 
-<section id="outline-container-org08ae704" class="outline-2">
-<h2 id="org08ae704">Getting Started with Tracing</h2>
-<div class="outline-text-2" id="text-org08ae704">
+<section id="outline-container-orge31e8c5" class="outline-2">
+<h2 id="orge31e8c5">Getting Started with Tracing</h2>
+<div class="outline-text-2" id="text-orge31e8c5">
 <p>
 You can get started installing the crate into your project.
 </p>
@@ -272,7 +272,7 @@ Thanks for reading!
 <div class='footer'>
   Copyright © 2024 <a href='mailto:matheusalmeida025@gmail.com'>Matheus Almeida.</a><br>
   Template by <a href='https://gitlab.com/psachin/psachin.gitlab.io/'>Sachin Patil</a> <br>
-  Last updated on Jun 07, 2024. Generated using <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4).
+  Last updated on Feb 18, 2025. Generated using <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4).
 </div>
 </footer>
 </body>
