@@ -4,223 +4,117 @@
 #+filetags: arch hyprland configuration
 #+setupfile: ../org-templates/post.org
 
-A few weeks ago I was using my KDE manjaro and saw a post in X about Arch Linux and hyprland who caugth my atention. The post was a video (I didn't find the video for reference) showing a specific configuration and I was absolutely astonished about how the system looks clean and beautifull. In this moment I decided to build my configuration using Arch and Hyprland.
+A few weeks ago, I was using KDE Manjaro when I came across a post on X about Arch Linux and Hyprland that caught my attention. The post featured a video (which I couldn't find again for reference) showcasing a specific configuration, and I was absolutely amazed by how clean and beautiful the system looked. At that moment, I decided to build my own configuration using Arch and Hyprland.
 
-This journey was divided into a few small chapters:
+This journey was divided into several small chapters:
 
-* Write and customize Hyprland configuration
-I started writing my configuration using before using it. This give me more control about what I am doing and what I can do next without break the system. I used a few dotfiles as example and tested their solutions to understand what I want in my system. Between these dotfiles I want to reference:
+* Writing and Customizing Hyprland Configuration
+I began by writing my configuration before actually using it. This approach gave me more control over what I was doing and what I could do next without breaking the system. I explored various dotfiles as examples, testing different solutions to determine what I wanted for my setup. Some of the most helpful dotfiles I referenced were:
 - [[https://github.com/outragedline/dotfiles][Outragedline dotfiles]]
 - [[https://github.com/SolDoesTech/hyprland][SolDoesTech dotfiles]]
-These dotfiles gave me a great idea of what I want and how to organize things. A special thanks to Outragedline who become a friend and supports me to create this configuration.
-
-So, after researching about the packages I create a few collection of them to use:
-
-- [[https://github.com/kovidgoyal/kitty][Kitty]], a free and open source GPU accelerated terminal emulator written in C and Python.
-- [[https://github.com/ClementTsang/bottom][Bottom]], a customizable system monitor for terminal inspired by htop and written in Rust.
-- [[https://github.com/davatorium/rofi][Rofi]], a window switcher and application launcher for creating menus written in C.
-- [[https://github.com/swaywm/swaylock][Swaylock]], a screen locker for Wayland written in C.
-- [[https://github.com/Alexays/Waybar][Waybar]], a customizable Wayland bar written in C++.
-- [[https://github.com/sxyazi/yazi][Yazi]], a amazing terminal file manager written in Rust.
-
-  This part is really annoying because it's writting and testing, there's no much to talk about it so I will just drop where I put my [[https://github.com/math-almeida/dotfiles/tree/master/Desktop][configurations]] in dotfiles as reference.
-  
+These resources gave me a great understanding of how to organize my configuration. A special thanks to Outragedline, who became a friend and supported me throughout this process.
+After researching the necessary packages, I compiled a collection to use:
+- [[https://github.com/kovidgoyal/kitty][Kitty]]: A free and open source GPU accelerated terminal emulator written in C and Python.
+- [[https://github.com/ClementTsang/bottom][Bottom]]: A customizable terminal-based system monitor inspired by htop, written in Rust.
+- [[https://github.com/davatorium/rofi][Rofi]]: A window switcher and application launcher for creating menus, written in C.
+- [[https://github.com/swaywm/swaylock][Swaylock]]: A screen locker for Wayland, written in C.
+- [[https://github.com/Alexays/Waybar][Waybar]]: A customizable Wayland bar, written in C++.
+- [[https://github.com/sxyazi/yazi][Yazi]]: A amazing terminal file manager, written in Rust.
+ 
+This part of the setup was tedious because it involved writing and testing configurations. Rather than explaining every detail, I'll just share my [[https://github.com/math-almeida/dotfiles/tree/master/Desktop][configuration]] as a reference. 
+ 
 * Create script for automatize instalation and future uses
-Since the begining of my dotfiles I created a Makefile and a few helpers to install the intire system in the easy way, with the desktop configuration this cannot be different.
-The first thing I created is a [[https://github.com/math-almeida/dotfiles/blob/master/packages.yaml][packages.yaml]] file with all our packages to install, so we can modify only in one place to reflect in specific steps on installation. But it leads one problem: How I can read the yaml keys without great dependencies or complicated logic?
-My solution was installing [[https://github.com/mikefarah/yq][yq]] as dependency process the file so we can format the arguments and pass to pacman or yay without problem. 
+Since the beginning of my dotfiles project, I created a Makefile and several helper scripts to simplify system installation. The same approach applied to my desktop configuration.
+First, I created a [[https://github.com/math-almeida/dotfiles/blob/master/packages.yaml][packages.yaml]] file listing all the packages to install. This allows modifications in one place while reflecting changes across different installation steps. However, I faced a challenge: how to read YAML keys without adding heavy dependencies or complicated logic?
+My solution was to use [[https://github.com/mikefarah/yq][yq]] to process the file and format the arguments for pacman or yay:
 #+begin_src sh
 @yq '.yay.hypr' packages.yaml | tr -d '[],"' | xargs yay -S --noconfirm
 #+end_src
-After this we need to symlink our newest configuration in the correct places, for this I have a [[https://github.com/math-almeida/dotfiles/blob/master/symlinks.rb][symlink]] script written in ruby (thanks vinibispo) to symlink all our configuration files, we just need to put the file in the desktop root and run the script from there.
+After installing the packages, I needed to symlink my latest configurations to the correct locations. For this, I used a [[https://github.com/math-almeida/dotfiles/blob/master/symlinks.rb][symlink]] script written in Ruby (thanks to vinibispo) to automate the process:
 #+begin_src sh
 cp symlinks.rb Desktop && cd Desktop && ruby symlinks.rb && rm symlinks.rb
 #+end_src
 
 * Installing Arch
-First we need to dowload the iso file in [[https://archlinux.org/download/][arch website]]. I use the unicamp mirror in Brazil since I live here :)
-I prepared beforehand a bootlabe pen-drive using [[https://www.ventoy.net/en/index.html][ventoy]] (thanks Rick) an amazing open source tool who can store multiple iso files and also normal files and act like a normal pen drive.
+First, I downloaded the ISO file from the Arch Linux website. Since I live in Brazil, I used the Unicamp mirror.
+To create a bootable USB drive, I prepared it using Ventoy (thanks, Rick!). This fantastic open-source tool allows storing multiple ISO files while keeping the USB functional for regular file storage.
 
-After rebooting the computer and prompt to arch iso, we face arch installation terminal who runs commands as root to make this inital configuration. Arch have a instalation script called =archinstall= but before run it we need to connect with internet, we can do it calling iwctl (iNet wireless daemon).
-- First we need to identify our network device
+** Connecting to Wi-Fi in Arch Live Environment
+After booting into the Arch ISO, I used =iwctl= (iNet Wireless Daemon) to connect to Wi-Fi:
 
+1 - Identify the network device:
   #+begin_src sh
 ip addr show
   #+end_src
  Mine is =wlan0=
 
- - Second we need to identify the available wifi networks
-
+2 - List available Wi-Fi networks:
    #+begin_src sh
 iwctl station wlan0 get-networks
    #+end_src
-This command will show all wifi networks and SSID near you
 
-- Finally we connect into wifi running
-
+3 - Connect to the network:
   #+begin_src sh
 iwctl --passphrase "your-passphrase" station wlan0 connect your-wifi-network
   #+end_src
-And it's done! You can run =ip addr show= again to see if everything is ok.
+To verify the connection, run =ip addr show= again.
 
-The second step is run the installer =archinstall= script who gave us a simple interface to choose how we install our system.
-For reference I will write what I choose for a minimal instalation.
+** Running the Arch Installer
+I then used the =archinstall= script, which provides an easy interface for installation. For a minimal setup, I selected:
 
 #+begin_src sh
 {
-    "additional-repositories": [
-        "multilib"
-    ],
+    "additional-repositories": ["multilib"],
     "archinstall-language": "English",
-    "audio_config": {
-        "audio": "pipewire"
-    },
+    "audio_config": {"audio": "pipewire"},
     "bootloader": "Systemd-boot",
-    "config_version": "3.0.2",
-    "debug": false,
     "disk_config": {
         "config_type": "default_layout",
-        "device_modifications": [
-            {
-                "device": "/dev/nvme0n1",
-                "partitions": [
-                    {
-                        "btrfs": [],
-                        "dev_path": null,
-                        "flags": [
-                            "boot",
-                            "esp"
-                        ],
-                        "fs_type": "fat32",
-                        "mount_options": [],
-                        "mountpoint": "/boot",
-                        "size": {
-                            "sector_size": {
-                                "unit": "B",
-                                "value": 512
-                            },
-                            "unit": "GiB",
-                            "value": 1
-                        },
-                        "start": {
-                            "sector_size": {
-                                "unit": "B",
-                                "value": 512
-                            },
-                            "unit": "MiB",
-                            "value": 1
-                        },
-                        "status": "create",
-                        "type": "primary"
-                    },
-                    {
-                        "btrfs": [],
-                        "dev_path": null,
-                        "flags": [],
-                        "fs_type": "ext4",
-                        "mount_options": [],
-                        "mountpoint": "/",
-                        "size": {
-                            "sector_size": {
-                                "unit": "B",
-                                "value": 512
-                            },
-                            "unit": "B",
-                        },
-                        "start": {
-                            "sector_size": {
-                                "unit": "B",
-                                "value": 512
-                            },
-                            "unit": "B",
-                        },
-                        "status": "create",
-                        "type": "primary"
-                    }
-                ],
-                "wipe": true
-            }
-        ]
+        "device_modifications": [{
+            "device": "/dev/nvme0n1",
+            "partitions": [
+                {"fs_type": "fat32", "mountpoint": "/boot", "flags": ["boot", "esp"]},
+                {"fs_type": "ext4", "mountpoint": "/"}
+            ],
+            "wipe": true
+        }]
     },
     "hostname": "archlinux",
-    "kernels": [
-        "linux"
-    ],
-    "locale_config": {
-        "kb_layout": "us",
-        "sys_enc": "UTF-8",
-        "sys_lang": "en_US"
-    },
-    "mirror_config": {
-        "custom_mirrors": [],
-        "mirror_regions": {
-            "Brazil": [
-                "http://archlinux.c3sl.ufpr.br/$repo/os/$arch",
-                "https://archlinux.c3sl.ufpr.br/$repo/os/$arch",
-                "http://br.mirrors.cicku.me/archlinux/$repo/os/$arch",
-                "https://br.mirrors.cicku.me/archlinux/$repo/os/$arch",
-                "http://mirror.ufam.edu.br/archlinux/$repo/os/$arch",
-                "http://mirror.ufscar.br/archlinux/$repo/os/$arch",
-                "https://mirror.ufscar.br/archlinux/$repo/os/$arch",
-                "http://mirrors.ic.unicamp.br/archlinux/$repo/os/$arch",
-                "https://mirrors.ic.unicamp.br/archlinux/$repo/os/$arch"
-            ]
-        }
-    },
-    "mount_point": "/mnt/archinstall",
-    "network_config": {
-        "type": "nm"
-    },
-    "no_pkg_lookups": false,
-    "ntp": true,
-    "offline": false,
-    "packages": [],
-    "parallel downloads": 0,
-    "profile_config": {
-        "gfx_driver": null,
-        "greeter": null,
-        "profile": {
-            "custom_settings": {},
-            "details": [],
-            "main": "Minimal"
-        }
-    },
-    "save_config": null,
-    "script": "guided",
-    "silent": false,
-    "skip_ntp": false,
-    "skip_version_check": false,
-    "swap": true,
-    "timezone": "America/Sao_Paulo",
-    "uki": false,
-    "version": "3.0.2"
+    "kernels": ["linux"],
+    "locale_config": {"kb_layout": "us", "sys_lang": "en_US"},
+    "mirror_config": {"mirror_regions": {"Brazil": [
+        "http://mirrors.ic.unicamp.br/archlinux/$repo/os/$arch"
+    ]}},
+    "timezone": "America/Sao_Paulo"
 }
 #+end_src
-
-I removed a few IDs and values from this json so I recomend to use just for reference :)
-After complete the instalation we need to reboot our system.
-
+After completing the installation, I rebooted:
 #+begin_src sh
 reboot
 #+end_src
 
-After the rebooting the system will prompt to Arch login, we can use the login created in the archinstall script passing the username and password. After this we are inside a minimal Arch configuration! \o/
+Upon reboot, the system prompted me for my login credentials. Once logged into the minimal Arch environment, I proceeded with my personal configuration setup.
 
-I create a script for install my personal configuration so I will use it to complete the installation and install hyprland and their dependences.
-First we need to connect into internet, we can use nmcli (NetworkManager)
+** Finalizing the Setup
+First, I connected to Wi-Fi using =nmcli=:
 #+begin_src sh
 nmcli device wifi connect your-wifi-network password your-password
 #+end_src
-After connecting with internet we can use pacman to install git.
+Then, I installed =git= with:
 #+begin_src sh
 sudo pacman -S git --noconfirm
 #+end_src
-And with git installed we can clone our dotfiles repository to use in our configuration.
+Next, I cloned my dotfiles repository:
 #+begin_src sh
 git clone https://github.com/math-almeida/dotfiles.git
 #+end_src
-With this repository we can navigate to his root with =cd dotfiles= and use the =build= command from our Makefile.
+Inside the repository, I ran my Makefile script:
 #+begin_src sh
+cd dotfiles
 make build
 #+end_src
-This will install and configure the rest of our system, at the end of script we can just run =hyprland= and it's all done!
+This script installed and configured the rest of my system. Finally, I started Hyprland:
+#+begin_src sh
+hyprland
+#+end_src
+And that’s it! My Arch Linux + Hyprland setup was complete!
