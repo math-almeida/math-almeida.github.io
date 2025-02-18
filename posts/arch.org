@@ -36,8 +36,8 @@ cp symlinks.rb Desktop && cd Desktop && ruby symlinks.rb && rm symlinks.rb
 #+end_src
 
 * Installing Arch
-First, I downloaded the ISO file from the Arch Linux website. Since I live in Brazil, I used the Unicamp mirror.
-To create a bootable USB drive, I prepared it using Ventoy (thanks, Rick!). This fantastic open-source tool allows storing multiple ISO files while keeping the USB functional for regular file storage.
+First, I downloaded the ISO file from the [[https://archlinux.org/download/][ Arch Linux website]]. Since I live in Brazil, I used the Unicamp mirror.
+To create a bootable USB drive, I prepared it using [[https://www.ventoy.net/en/index.html][Ventoy]] (thanks, Rick!). This fantastic open-source tool allows storing multiple ISO files while keeping the USB functional for regular file storage.
 
 ** Connecting to Wi-Fi in Arch Live Environment
 After booting into the Arch ISO, I used =iwctl= (iNet Wireless Daemon) to connect to Wi-Fi:
