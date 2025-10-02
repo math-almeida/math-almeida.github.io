@@ -1,4 +1,4 @@
-#+title: =Manjaro Installation Guide: From Bootable USB to System Persistence=
+#+title: Manjaro Installation Guide: From Bootable USB to System Persistence
 #+date: <2025-10-02 Thu>
 #+PROPERTY: header-args:emacs-lisp
 #+filetags: arch manjaro configuration
