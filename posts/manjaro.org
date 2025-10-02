@@ -14,7 +14,7 @@ The journey begins with creating a bootable USB drive. This process transforms a
 
 ** What You'll Need
 - A USB drive with at least 8GB of storage.
-- The Manjaro ISO file from  [[manjaro.org][manjaro.org]]
+- The Manjaro ISO file from  [[https://manjaro.org][manjaro.org]]
 - A USB creation tool appropriate for your current operating system
 
 *** On Windows
