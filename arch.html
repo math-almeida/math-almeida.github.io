@@ -73,9 +73,9 @@ A few weeks ago, I was using KDE Manjaro when I came across a post on X about Ar
 This journey was divided into several small chapters:
 </p>
 
-<section id="outline-container-org8f97e08" class="outline-2">
-<h2 id="org8f97e08">Writing and Customizing Hyprland Configuration</h2>
-<div class="outline-text-2" id="text-org8f97e08">
+<section id="outline-container-org69a62c1" class="outline-2">
+<h2 id="org69a62c1">Writing and Customizing Hyprland Configuration</h2>
+<div class="outline-text-2" id="text-org69a62c1">
 <p>
 I began by writing my configuration before actually using it. This approach gave me more control over what I was doing and what I could do next without breaking the system. I explored various dotfiles as examples, testing different solutions to determine what I wanted for my setup. Some of the most helpful dotfiles I referenced were:
 </p>
@@ -102,9 +102,9 @@ This part of the setup was tedious because it involved writing and testing confi
 </div>
 </section>
 
-<section id="outline-container-orgc96ae8f" class="outline-2">
-<h2 id="orgc96ae8f">Create script for automatize instalation and future uses</h2>
-<div class="outline-text-2" id="text-orgc96ae8f">
+<section id="outline-container-org841dd32" class="outline-2">
+<h2 id="org841dd32">Create script for automatize instalation and future uses</h2>
+<div class="outline-text-2" id="text-org841dd32">
 <p>
 Since the beginning of my dotfiles project, I created a Makefile and several helper scripts to simplify system installation. The same approach applied to my desktop configuration.
 First, I created a <a href="https://github.com/math-almeida/dotfiles/blob/master/packages.yaml">packages.yaml</a> file listing all the packages to install. This allows modifications in one place while reflecting changes across different installation steps. However, I faced a challenge: how to read YAML keys without adding heavy dependencies or complicated logic?
@@ -124,18 +124,18 @@ After installing the packages, I needed to symlink my latest configurations to t
 </div>
 </section>
 
-<section id="outline-container-org9bc5636" class="outline-2">
-<h2 id="org9bc5636">Installing Arch</h2>
-<div class="outline-text-2" id="text-org9bc5636">
+<section id="outline-container-org3d1da91" class="outline-2">
+<h2 id="org3d1da91">Installing Arch</h2>
+<div class="outline-text-2" id="text-org3d1da91">
 <p>
 First, I downloaded the ISO file from the <a href="https://archlinux.org/download/"> Arch Linux website</a>. Since I live in Brazil, I used the Unicamp mirror.
 To create a bootable USB drive, I prepared it using <a href="https://www.ventoy.net/en/index.html">Ventoy</a> (thanks, Rick!). This fantastic open-source tool allows storing multiple ISO files while keeping the USB functional for regular file storage.
 </p>
 </div>
 
-<div id="outline-container-org8b09efc" class="outline-3">
-<h3 id="org8b09efc">Connecting to Wi-Fi in Arch Live Environment</h3>
-<div class="outline-text-3" id="text-org8b09efc">
+<div id="outline-container-orga3c6a68" class="outline-3">
+<h3 id="orga3c6a68">Connecting to Wi-Fi in Arch Live Environment</h3>
+<div class="outline-text-3" id="text-orga3c6a68">
 <p>
 After booting into the Arch ISO, I used <code>iwctl</code> (iNet Wireless Daemon) to connect to Wi-Fi:
 </p>
@@ -172,9 +172,9 @@ To verify the connection, run <code>ip addr show</code> again.
 </div>
 </div>
 
-<div id="outline-container-org32171df" class="outline-3">
-<h3 id="org32171df">Running the Arch Installer</h3>
-<div class="outline-text-3" id="text-org32171df">
+<div id="outline-container-org7a165c2" class="outline-3">
+<h3 id="org7a165c2">Running the Arch Installer</h3>
+<div class="outline-text-3" id="text-org7a165c2">
 <p>
 I then used the <code>archinstall</code> script, which provides an easy interface for installation. For a minimal setup, I selected:
 </p>
@@ -220,9 +220,9 @@ Upon reboot, the system prompted me for my login credentials. Once logged into t
 </div>
 </div>
 
-<div id="outline-container-orgcc146e2" class="outline-3">
-<h3 id="orgcc146e2">Finalizing the Setup</h3>
-<div class="outline-text-3" id="text-orgcc146e2">
+<div id="outline-container-org13e33fd" class="outline-3">
+<h3 id="org13e33fd">Finalizing the Setup</h3>
+<div class="outline-text-3" id="text-org13e33fd">
 <p>
 First, I connected to Wi-Fi using <code>nmcli</code>:
 </p>
