@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- Oct 02, 2025 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title><code>Manjaro Installation Guide: From Bootable USB to System Persistence</code></title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="math-almeida" />
+<link rel='icon' type='image/png' href='/images/favicon.png'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='preconnect' href='https://fonts.gstatic.com'>
+<link href='https://code.cdn.mozilla.net/fonts/zilla-slab.css' rel='stylesheet'>
+<link rel='stylesheet' href='/css/site.css?v=2' type='text/css'/>
+<link rel='stylesheet' href='/css/custom.css' type='text/css'/>
+<link rel='stylesheet' href='/css/syntax-coloring.css' type='text/css'/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="/"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><header id="top" class="status">
+<div class='intro'>
+  <img src='/images/about/profile.png' alt='Torresmo' class='no-border'/>
+  <h1>
+    <span class="gray">Torresmo</span>
+  </h1>
+</div>
+
+<div class='nav'>
+<ul>
+<li><a href='/'>Home</a>.</li>
+<li><a href='https://github.com/math-almeida'>GitHub</a>.</li>
+<li><a href='/about/'>About</a></li>
+</ul>
+</div>
+</header>
+<main id="content">
+<h1 class="title"><code>Manjaro Installation Guide: From Bootable USB to System Persistence</code>
+<br />
+<span class="subtitle">Published on Oct 02, 2025 by math-almeida.</span>
+</h1>
+<p>
+I created this comprehensive guide to help friends and newcomers to dive into amazing world of Arch Linux. We&rsquo;ll walk througth every step of installing and configuring Manjaro.
+</p>
+
+<section id="outline-container-org53f4b3d" class="outline-2">
+<h2 id="org53f4b3d">Why Choose Manjaro Linux?</h2>
+<div class="outline-text-2" id="text-org53f4b3d">
+<p>
+Before we dive into the installation process, let&rsquo;s understand what makes Manjaro special. Unlike traditional Linux distributions that release major versions every few years, Manjaro follows a rolling release model. This means you get the latest software updates continuously without ever needing to reinstall your entire system.
+</p>
+</div>
+</section>
+
+<section id="outline-container-orgf3b438c" class="outline-2">
+<h2 id="orgf3b438c">Phase 1: The bootable drive</h2>
+<div class="outline-text-2" id="text-orgf3b438c">
+<p>
+The journey begins with creating a bootable USB drive. This process transforms a regular USB stick into a portable installer that can boot your computer into Manjaro&rsquo;s live environment.
+</p>
+</div>
+
+<div id="outline-container-orgbd1d5a5" class="outline-3">
+<h3 id="orgbd1d5a5">What You&rsquo;ll Need</h3>
+<div class="outline-text-3" id="text-orgbd1d5a5">
+<ul class="org-ul">
+<li>A USB drive with at least 8GB of storage.</li>
+<li>The Manjaro ISO file from  <a href="https://manjaro.org">manjaro.org</a></li>
+<li>A USB creation tool appropriate for your current operating system</li>
+</ul>
+</div>
+
+<div id="outline-container-orge437ab5" class="outline-4">
+<h4 id="orge437ab5">On Windows</h4>
+<div class="outline-text-4" id="text-orge437ab5">
+<p>
+For Windows I like to use <a href="https://rufus.ie/pt_BR/">Rufus</a> a lightweight application to create bootable USB devices.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4e0986c" class="outline-4">
+<h4 id="org4e0986c">On Linux</h4>
+<div class="outline-text-4" id="text-org4e0986c">
+<p>
+We can use <code>dd</code> command to flash our drive
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">First, identify your USB device
+</span>lsblk
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Then write the ISO (replace /dev/sdX with your actual device)
+</span>sudo dd <span class="org-variable-name">if</span>=/path/to/manjaro.iso <span class="org-variable-name">of</span>=/dev/sdX <span class="org-variable-name">bs</span>=4M <span class="org-variable-name">status</span>=progress <span class="org-variable-name">oflag</span>=sync
+</pre>
+</div>
+<p>
+<b>Note</b>: The <code>dd</code> command is irreversible, so double-check your device identifier to avoid problems :D 
+</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="outline-container-org3015069" class="outline-2">
+<h2 id="org3015069">Phase 2: The BIOS/UEFI Settings</h2>
+<div class="outline-text-2" id="text-org3015069">
+<p>
+In order to install Manjaro we need to disable secure boot and change boot prority.
+</p>
+
+<ol class="org-ol">
+<li><b>Access BIOS/UEFI</b>: Restart your computer and press the appropriate key during startup. Common keys include F12, F2, Del or Esc</li>
+<li><b>Navigate to boot settings</b>: Look for sections named &ldquo;Boot&rdquo; or &ldquo;Boot priority&rdquo;</li>
+<li><b>Disable secure boot</b>: This Microsoft security feature often prevents Linux installations :(</li>
+<li><b>Set boot priority</b>: Move your USB drive to the top of boot order</li>
+<li><b>Save and exit</b>: Apply the changes and restart</li>
+</ol>
+</div>
+</section>
+
+<section id="outline-container-org97e527d" class="outline-2">
+<h2 id="org97e527d">Phase 3: Booting into Manjaro live environment</h2>
+<div class="outline-text-2" id="text-org97e527d">
+<p>
+With all this things configured we can enter in a Manjaro live environment wich is a fully functional desktop environment where you can test hardware compatibility before installing.
+</p>
+
+<p>
+Just insert the USB drive and select it from boot menu. After this you need to choose your boot option in Manjaro GRUB and that&rsquo;s all, just wait for live environment!
+</p>
+</div>
+</section>
+
+<section id="outline-container-org339ed6a" class="outline-2">
+<h2 id="org339ed6a">Phase 4: The Installation</h2>
+<div class="outline-text-2" id="text-org339ed6a">
+<p>
+For installing Manjaro permanently in your computer you just need to launch the installer, there&rsquo;s an icon on desktop for this. The installer application features a clean, intuitive interface that guides you into installation process.
+</p>
+</div>
+</section>
+
+<section id="outline-container-org0494458" class="outline-2">
+<h2 id="org0494458">Enjoy your Linux!</h2>
+<div class="outline-text-2" id="text-org0494458">
+<p>
+That&rsquo;s it, you installed a Arch based distro in your computer, just restart and remove USB drive when prompted and wild GRUB appears. Just login and enjoy.
+</p>
+
+<p>
+Now I will describe how to do certain things and optional configurations for enhance the divine experience of having a linux.
+</p>
+</div>
+
+<div id="outline-container-org421d7f7" class="outline-3">
+<h3 id="org421d7f7">Updating</h3>
+<div class="outline-text-3" id="text-org421d7f7">
+<p>
+<code>pacman</code> is Manjaro&rsquo;s package manager and unlike Ubuntu&rsquo;s <code>apt</code> it uses a different syntax
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">Install a package
+</span>pacman -S &lt;pkg&gt;
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Remove a package
+</span>pacman -R &lt;pkg&gt;
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Update the system (yes, no more auto updates who breaks UX)
+</span>pacman -Syu
+</pre>
+</div>
+<p>
+I like to enable AUR (Arch User Repository) using yay. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo pacman -S yay 
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org85998a3" class="outline-4">
+<h4 id="org85998a3">Optional function to update and clean your system</h4>
+<div class="outline-text-4" id="text-org85998a3">
+<p>
+I like to create functions to help in simple things :)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-keyword">function</span> <span class="org-function-name">update</span>() {
+  <span class="org-keyword">if</span> command -v yay &amp;&gt; /dev/null; <span class="org-keyword">then</span>
+      <span class="org-builtin">echo</span> <span class="org-string">"Updating system with yay."</span>
+      yay -Syu --noconfirm
+      sudo pacman --noconfirm -Rns $(pacman -Qdtq) 2&gt; /dev/null
+  <span class="org-keyword">else</span>
+      <span class="org-builtin">echo</span> <span class="org-string">"Updating system with pacman."</span>
+      sudo pacman -Syu --noconfirm
+      sudo pacman --noconfirm -Rns $(pacman -Qdtq) 2&gt; /dev/null
+  <span class="org-keyword">fi</span>
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb7e5e69" class="outline-3">
+<h3 id="orgb7e5e69">Optional explain function</h3>
+<div class="outline-text-3" id="text-orgb7e5e69">
+<p>
+I created this function to help newcomers understand commands and tools on linux. It is based in a public API and doesn&rsquo;t replaces the need of consulting <code>man</code> or other sources, is just a helper to explain arguments and tools
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-keyword">function</span> <span class="org-function-name">explain</span>() {
+    <span class="org-keyword">if</span> [ <span class="org-string">"$#"</span> -lt 1 ]; <span class="org-keyword">then</span>
+        <span class="org-builtin">echo</span> -e <span class="org-string">"\nUsage: explain COMMAND [ARGS]"</span> &gt;&amp;2
+        <span class="org-builtin">echo</span> -e <span class="org-string">"Example: explain tar -xzvf\n"</span> &gt;&amp;2
+        <span class="org-keyword">return</span> 1
+    <span class="org-keyword">fi</span>
+
+    local <span class="org-variable-name">query</span>=<span class="org-string">"$(printf "%s " "$@" | sed 's/ $//')"</span>
+    local <span class="org-variable-name">encoded_query</span>=<span class="org-string">"$(echo -n "$query" | sed -e 's/ /%20/g' -e 's/\"/%22/g' -e "s/'/%27/g")"</span>
+
+    local <span class="org-variable-name">response</span>=$(curl -s <span class="org-string">"https://explainshell.com/explain?cmd=$encoded_query"</span>)
+
+    <span class="org-keyword">if</span> [[ -z <span class="org-string">"$response"</span> ]]; <span class="org-keyword">then</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"Error: Could not retrieve explanation."</span> &gt;&amp;2
+        <span class="org-keyword">return</span> 1
+    <span class="org-keyword">fi</span>
+    <span class="org-builtin">set</span> -o pipefail &amp;&amp; <span class="org-builtin">echo</span> -e <span class="org-string">"$(echo "$response" | awk '
+  BEGIN {print ""}
+  /&lt;pre class="help-box" id="help-0"&gt;/ {print substr($0, index($0, "&gt;")+1, index($0, "&lt;/")-index($0, "&gt;")-1); print "____________________________________________________"}
+  /&lt;pre class="help-box" id="help-[1-9]"&gt;/ {gsub(/&lt;\/?[^&gt;]+&gt;/, ""); sub(/^[ \t]+/, ""); print $0; print "____________________________________________________"}
+  END {print ""}
+')\n"</span>
+}
+</pre>
+</div>
+<p>
+To use you can just type the command you want explanation.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">explain tar -xvf 
+</pre>
+</div>
+<p>
+And the response is:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">The GNU version of the tar archiving utility
+____________________________________________________
+-x, --extract, --get
+____________________________________________________
+-v, --verbose
+____________________________________________________
+-f, --file ARCHIVE
+____________________________________________________
+</pre>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer id="postamble" class="status">
+<div class='footer'>
+  Copyright © 2024 <a href='mailto:matheusalmeida025@gmail.com'>Matheus Almeida.</a><br>
+  Template by <a href='https://gitlab.com/psachin/psachin.gitlab.io/'>Sachin Patil</a> <br>
+  Last updated on Oct 02, 2025. Generated using <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4).
+</div>
+</footer>
+</body>
+</html>
