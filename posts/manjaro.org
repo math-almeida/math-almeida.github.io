@@ -1,31 +1,26 @@
 #+title: =Manjaro Installation Guide: From Bootable USB to System Persistence=
 #+date: <2025-10-02 Thu>
 #+PROPERTY: header-args:emacs-lisp
-#+filetags: arch hyprland configuration
+#+filetags: arch manjaro configuration
 #+setupfile: ../org-templates/post.org
 
 I created this comprehensive guide to help friends and newcomers to dive into amazing world of Arch Linux. We'll walk througth every step of installing and configuring Manjaro.
 
 * Why Choose Manjaro Linux?
-
 Before we dive into the installation process, let's understand what makes Manjaro special. Unlike traditional Linux distributions that release major versions every few years, Manjaro follows a rolling release model. This means you get the latest software updates continuously without ever needing to reinstall your entire system.
 
 * Phase 1: The bootable drive
-
 The journey begins with creating a bootable USB drive. This process transforms a regular USB stick into a portable installer that can boot your computer into Manjaro's live environment.
 
 ** What You'll Need
-
 - A USB drive with at least 8GB of storage.
 - The Manjaro ISO file from  [[manjaro.org][manjaro.org]]
 - A USB creation tool appropriate for your current operating system
 
 *** On Windows
-
 For Windows I like to use [[https://rufus.ie/pt_BR/][Rufus]] a lightweight application to create bootable USB devices.
 
 *** On Linux
-
 We can use =dd= command to flash our drive
 
 #+begin_src sh
@@ -38,7 +33,6 @@ We can use =dd= command to flash our drive
 *Note*: The =dd= command is irreversible, so double-check your device identifier to avoid problems :D 
 
 * Phase 2: The BIOS/UEFI Settings
-
 In order to install Manjaro we need to disable secure boot and change boot prority.
 
 1. *Access BIOS/UEFI*: Restart your computer and press the appropriate key during startup. Common keys include F12, F2, Del or Esc
@@ -48,23 +42,19 @@ In order to install Manjaro we need to disable secure boot and change boot prori
 5. *Save and exit*: Apply the changes and restart
 
 * Phase 3: Booting into Manjaro live environment
-
 With all this things configured we can enter in a Manjaro live environment wich is a fully functional desktop environment where you can test hardware compatibility before installing.
 
 Just insert the USB drive and select it from boot menu. After this you need to choose your boot option in Manjaro GRUB and that's all, just wait for live environment!
 
 * Phase 4: The Installation
-
 For installing Manjaro permanently in your computer you just need to launch the installer, there's an icon on desktop for this. The installer application features a clean, intuitive interface that guides you into installation process.
 
 * Enjoy your Linux!
-
 That's it, you installed a Arch based distro in your computer, just restart and remove USB drive when prompted and wild GRUB appears. Just login and enjoy.
 
 Now I will describe how to do certain things and optional configurations for enhance the divine experience of having a linux.
 
 ** Updating
-
 =pacman= is Manjaro's package manager and unlike Ubuntu's =apt= it uses a different syntax
 
 #+begin_src sh
@@ -84,7 +74,6 @@ I like to enable AUR (Arch User Repository) using yay.
 #+end_src
    
 *** Optional function to update and clean your system
-
 I like to create functions to help in simple things :)
 
 #+begin_src sh
@@ -102,7 +91,6 @@ I like to create functions to help in simple things :)
 #+end_src
 
 ** Optional explain function
-
 I created this function to help newcomers understand commands and tools on linux. It is based in a public API and doesn't replaces the need of consulting =man= or other sources, is just a helper to explain arguments and tools
 
 #+begin_src sh
